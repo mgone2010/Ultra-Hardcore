@@ -1,0 +1,8 @@
+sql:
+  ip: 66.85.144.162
+  port: 3306
+  username: mcph204640
+  password: 6417561bc9
+  database: mcph204640
+server:
+  hub: hub

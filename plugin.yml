@@ -1,0 +1,11 @@
+name: UHC
+version: 0.1
+author: chasertw123
+
+description: Ultra Hardcore minigame!
+main: me.chasertw123.uhc.Main
+
+permissions:
+  uhc.sign.create:
+    description: Create UHC signs.
+    default: op
