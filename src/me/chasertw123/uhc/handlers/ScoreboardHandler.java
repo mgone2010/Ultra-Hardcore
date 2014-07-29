@@ -30,17 +30,17 @@ public class ScoreboardHandler {
 
 		int kills = plugin.getAPI().getStat(StatType.KILLS, p), deaths = plugin.getAPI().getStat(StatType.DEATHS, p);
 		
-		obj.getScore(ChatColor.AQUA + "").setScore(0);
-		obj.getScore(pre + "UHC Points").setScore(-1);
-		obj.getScore(this.first16Chars(ChatColor.DARK_PURPLE + scorepre + plugin.getAPI().getStat(StatType.POINTS, p))).setScore(-2);
-		obj.getScore(pre + "Kills").setScore(-3);
-		obj.getScore(this.first16Chars(ChatColor.BLACK + scorepre + kills)).setScore(-4);
-		obj.getScore(pre + "Deaths").setScore(-5);
-		obj.getScore(this.first16Chars(ChatColor.BLUE + scorepre + deaths)).setScore(-6);
-		obj.getScore(pre + "KDR").setScore(-7);
-		obj.getScore(this.first16Chars(ChatColor.DARK_AQUA + scorepre + Math.round(kills / Math.max(1D, deaths) * 100D) / 100D)).setScore(-8);
-		obj.getScore(pre + "Games Won").setScore(-9);
-		obj.getScore(this.first16Chars(ChatColor.DARK_GRAY + scorepre + plugin.getAPI().getStat(StatType.GAMES_WON, p))).setScore(-10);
+		obj.getScore(ChatColor.AQUA + "").setScore(10);
+		obj.getScore(pre + "UHC Points").setScore(9);
+		obj.getScore(this.first16Chars(ChatColor.DARK_PURPLE + scorepre + plugin.getAPI().getStat(StatType.POINTS, p))).setScore(8);
+		obj.getScore(pre + "Kills").setScore(7);
+		obj.getScore(this.first16Chars(ChatColor.BLACK + scorepre + kills)).setScore(6);
+		obj.getScore(pre + "Deaths").setScore(5);
+		obj.getScore(this.first16Chars(ChatColor.BLUE + scorepre + deaths)).setScore(4);
+		obj.getScore(pre + "KDR").setScore(3);
+		obj.getScore(this.first16Chars(ChatColor.DARK_AQUA + scorepre + Math.round(kills / Math.max(1D, deaths) * 100D) / 100D)).setScore(2);
+		obj.getScore(pre + "Games Won").setScore(1);
+		obj.getScore(this.first16Chars(ChatColor.DARK_GRAY + scorepre + plugin.getAPI().getStat(StatType.GAMES_WON, p))).setScore(0);
 
 		
 		return board;

@@ -1,11 +1,11 @@
 package me.chasertw123.uhc;
 
-// import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.handlers.ListenerHandler;
 import me.chasertw123.uhc.handlers.ScoreboardHandler;
 import me.chasertw123.uhc.sql.SQL;
 import me.chasertw123.uhc.sql.SQLAPI;
+import me.chasertw123.uhc.teams.TeamManager;
 import me.chasertw123.uhc.utils.ServerConnector;
 
 import org.bukkit.Bukkit;
@@ -23,6 +23,7 @@ public class Main extends JavaPlugin {
 	private SQLAPI api = new SQLAPI(sql);
 	private ServerConnector sc = new ServerConnector(this);
 	private ScoreboardHandler sh = new ScoreboardHandler(this);
+	private TeamManager tm =  new TeamManager(this);
 	private Arena a;
 	
 	public void onEnable() {
@@ -99,5 +100,9 @@ public class Main extends JavaPlugin {
 
 	public Arena getA() {
 		return a;
+	}
+	
+	public TeamManager getTm() {
+		return tm;
 	}
 }
