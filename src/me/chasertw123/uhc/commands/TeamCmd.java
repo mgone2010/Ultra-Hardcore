@@ -50,6 +50,10 @@ public class TeamCmd implements CommandExecutor {
 					
 				}
 				
+				else if (args[0].equalsIgnoreCase("deny")) {
+					
+				}
+				
 				else if (args[0].equalsIgnoreCase("players")) {
 					
 				}
