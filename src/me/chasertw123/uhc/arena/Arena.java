@@ -25,7 +25,7 @@ public class Arena {
 	
 	private File file;
 	private FileConfiguration config;
-	
+	private ArenaType type;
 	public enum GameState{ LOBBY, STARTING, INGAME, DEATHMATCH, ENDING, RESETING, DISABLED; }
 	
 	public Arena() {
@@ -45,6 +45,12 @@ public class Arena {
 				this.generateRandomSeed(20), WorldType.NORMAL, true, "");
 		plugin.getMultiverseCore().getMVWorldManager().addWorld("UHC_world_nether", Environment.NETHER,
 				this.generateRandomSeed(20), WorldType.NORMAL, true, "");
+		
+		ArrayList<ArenaType> arenaTypes = new ArrayList<ArenaType>();
+		for (ArenaType at : ArenaType.values())
+			arenaTypes.add(at);
+		
+		this.type = arenaTypes.get(new Random().nextInt(arenaTypes.size()));
 		
 		this.setGameState(GameState.LOBBY);
 	}
@@ -161,5 +167,9 @@ public class Arena {
 
 	public int getDonatorSlots() {
 		return donatorSlots;
+	}
+	
+	public ArenaType getArenaType() {
+		return type;
 	}
 }

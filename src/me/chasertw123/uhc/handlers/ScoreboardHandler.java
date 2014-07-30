@@ -2,6 +2,7 @@ package me.chasertw123.uhc.handlers;
 
 import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.sql.SQLAPI.StatType;
+import me.chasertw123.uhc.teams.Team;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,6 +17,27 @@ public class ScoreboardHandler {
 	
 	public ScoreboardHandler(Main plugin) {
 		this.plugin = plugin;
+	}
+	
+	// Run this on start of the arena
+	public void start() {
+		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+		Objective obj = board.registerNewObjective("Arena", "dummy");
+		obj.setDisplaySlot(DisplaySlot.SIDEBAR); // Clear sidebar.
+		
+		for (Team t : Team.teamObjects) {
+			org.bukkit.scoreboard.Team team = board.registerNewTeam(t.getName());
+			
+			for (String s : t.getMembers())
+				team.addPlayer(Bukkit.getOfflinePlayer(s));
+			
+			team.setAllowFriendlyFire(false);
+			team.setCanSeeFriendlyInvisibles(true);
+			team.setPrefix(t.getPrefix());
+		}
+		
+		for (Player p : Bukkit.getOnlinePlayers()) 
+			p.setScoreboard(board);
 	}
 	
 	public Scoreboard getScoreboard(Player p) {
