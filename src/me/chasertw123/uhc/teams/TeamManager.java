@@ -22,7 +22,7 @@ public class TeamManager {
 	}
 
 	public void createTeam(Player p) {
-		createTeam(p, p.getName());
+		createTeam(p, p.getName() + "'s");
 	}
 
 	public Team getTeam(Player p) {
@@ -40,9 +40,17 @@ public class TeamManager {
 		for (Team t : Team.teamObjects)
 			if (t.getMembers().size() < at.getPlayersPerTeam()) {
 				t.addPlayer(p.getName());
+				plugin.sendMessage(p, "You got automatically put in the " + t.getName() + " team.");
 				return;
 			}
-
+		
+		plugin.sendMessage(p, "You got automatically in a new team.");
 		plugin.getTm().createTeam(p);
+	}
+
+	public void removePlayer(Player player) {
+		for (Team t : Team.teamObjects)
+			if (t.getMembers().contains(player.getName()))
+				t.removePlayer(player.getName());
 	}
 }

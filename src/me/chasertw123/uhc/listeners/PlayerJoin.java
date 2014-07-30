@@ -68,6 +68,7 @@ public class PlayerJoin implements Listener {
 			new LobbyTimer(plugin, a);
 		}
 
+		plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
 		if (a.getArenaType().isAutoTeaming())
 			plugin.getTm().autoTeam(p, a.getArenaType());
 	}

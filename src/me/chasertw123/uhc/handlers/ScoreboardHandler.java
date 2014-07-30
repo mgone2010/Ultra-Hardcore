@@ -20,6 +20,7 @@ public class ScoreboardHandler {
 	}
 	
 	// Run this on start of the arena
+	@SuppressWarnings("deprecation")
 	public void start() {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = board.registerNewObjective("Arena", "dummy");
@@ -34,12 +35,14 @@ public class ScoreboardHandler {
 			team.setAllowFriendlyFire(false);
 			team.setCanSeeFriendlyInvisibles(true);
 			team.setPrefix(t.getPrefix());
+			
+			t.setTeam(team);
 		}
 		
 		for (Player p : Bukkit.getOnlinePlayers()) 
 			p.setScoreboard(board);
 	}
-	
+		
 	public Scoreboard getScoreboard(Player p) {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = board.registerNewObjective(p.getName(), "dummy");

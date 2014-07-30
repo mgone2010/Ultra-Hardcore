@@ -2,6 +2,7 @@ package me.chasertw123.uhc.teams;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 public class Team {
@@ -11,6 +12,7 @@ public class Team {
 	private String teamName;
 	private String prefix;
 	public static ArrayList<Team> teamObjects = new ArrayList<Team>();
+	private org.bukkit.scoreboard.Team team = null;
 	@SuppressWarnings("serial")
 	public static ArrayList<String> teamColors = new ArrayList<String>(){{
 		// 10 normal colors, nothing special
@@ -53,6 +55,13 @@ public class Team {
 		prefix = prefixes.get(0);
 		teamObjects.add(this);
 	}
+	
+	@SuppressWarnings("deprecation")
+	public void sendMessage(String message) {
+		for (String s : members) 
+			if (Bukkit.getPlayerExact(s) != null)
+				Bukkit.getPlayerExact(s).sendMessage(ChatColor.WHITE + "[" + ChatColor.AQUA + "" + ChatColor.ITALIC + "UHC" + ChatColor.WHITE + "] " + message);
+	}
 
 	public String getCreator() {
 		return creator;
@@ -67,6 +76,7 @@ public class Team {
 	}
 
 	public void addPlayer(String m) {
+		sendMessage(m + " joined your team.");
 		members.add(m);
 	}
 
@@ -76,5 +86,16 @@ public class Team {
 
 	public String getPrefix() {
 		return prefix;
+	}
+
+	public void removePlayer(String name) {
+		members.remove(name);
+		sendMessage(name + " left your team.");
+		if (this.team != null)
+			team.removePlayer(Bukkit.getOfflinePlayer(name));
+	}
+	
+	public void setTeam(org.bukkit.scoreboard.Team t) {
+		this.team = t;
 	}
 }
