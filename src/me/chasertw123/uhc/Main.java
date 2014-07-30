@@ -1,6 +1,7 @@
 package me.chasertw123.uhc;
 
 import me.chasertw123.uhc.arena.Arena;
+import me.chasertw123.uhc.handlers.CommandHandler;
 import me.chasertw123.uhc.handlers.ListenerHandler;
 import me.chasertw123.uhc.handlers.ScoreboardHandler;
 import me.chasertw123.uhc.sql.SQL;
@@ -33,6 +34,7 @@ public class Main extends JavaPlugin {
 		this.getConfig().options().copyDefaults(true);
 		this.saveConfig();
 		
+		new CommandHandler(this);
 		new ListenerHandler(this);
 	}
 	
