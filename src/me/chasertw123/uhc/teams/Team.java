@@ -16,26 +16,27 @@ public class Team {
 		// 10 normal colors, nothing special
 		add(ChatColor.GREEN + ""); add(ChatColor.AQUA + "");
 		add(ChatColor.RED + ""); add(ChatColor.BLUE + ""); add(ChatColor.DARK_AQUA + ""); add(ChatColor.DARK_GREEN + ""); 
-		add(ChatColor.GOLD + ""); add(ChatColor.GRAY + ""); add (ChatColor.LIGHT_PURPLE + ""); add (ChatColor.WHITE + "");
+		add(ChatColor.GOLD + ""); add(ChatColor.GRAY + ""); add(ChatColor.LIGHT_PURPLE + ""); add(ChatColor.WHITE + "");
 
 		// 10 normal colors in bold
 		add(ChatColor.GREEN + "" + ChatColor.BOLD); add(ChatColor.AQUA + "" + ChatColor.BOLD); add(ChatColor.RED + "" + ChatColor.BOLD); 
 		add(ChatColor.BLUE + "" + ChatColor.BOLD); add(ChatColor.DARK_AQUA + "" + ChatColor.BOLD); add(ChatColor.DARK_GREEN + "" + ChatColor.BOLD); 
-		add(ChatColor.GOLD + "" + ChatColor.BOLD); add(ChatColor.GRAY + "" + ChatColor.BOLD); add (ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD);
-		add (ChatColor.WHITE + "" + ChatColor.BOLD);
+		add(ChatColor.GOLD + "" + ChatColor.BOLD); add(ChatColor.GRAY + "" + ChatColor.BOLD); add(ChatColor.LIGHT_PURPLE + "" + ChatColor.BOLD);
+		add(ChatColor.WHITE + "" + ChatColor.BOLD);
 
-		// 10 normal colors in ITALIC
+		// 10 normal colors in italic
 		add(ChatColor.GREEN + "" + ChatColor.ITALIC); add(ChatColor.AQUA + "" + ChatColor.ITALIC); add(ChatColor.RED + "" + ChatColor.ITALIC); 
 		add(ChatColor.BLUE + "" + ChatColor.ITALIC); add(ChatColor.DARK_AQUA + "" + ChatColor.ITALIC); add(ChatColor.DARK_GREEN + "" + ChatColor.ITALIC); 
 		add(ChatColor.GOLD + "" + ChatColor.ITALIC); add(ChatColor.GRAY + "" + ChatColor.ITALIC); add(ChatColor.LIGHT_PURPLE + "" + ChatColor.ITALIC); 
 		add(ChatColor.WHITE + "" + ChatColor.ITALIC);
 
 		// Last 10 of the 40 total slots, these *should* only be given to donators (in a Solo arena)
+		// 10 normal colors in italic bold
 		add(ChatColor.GREEN + "" + ChatColor.ITALIC + "" + ChatColor.BOLD); add(ChatColor.AQUA + "" + ChatColor.ITALIC + "" + ChatColor.BOLD);
 		add(ChatColor.RED + "" + ChatColor.ITALIC + "" + ChatColor.BOLD); add(ChatColor.BLUE + "" + ChatColor.ITALIC + "" + ChatColor.BOLD); 
 		add(ChatColor.DARK_AQUA + "" + ChatColor.ITALIC + "" + ChatColor.BOLD); add(ChatColor.DARK_GREEN + "" + ChatColor.ITALIC + "" + ChatColor.BOLD); 
 		add(ChatColor.GOLD + "" + ChatColor.ITALIC + "" + ChatColor.BOLD); add(ChatColor.GRAY + "" + ChatColor.ITALIC + "" + ChatColor.BOLD); 
-		add(ChatColor.LIGHT_PURPLE + "" + ChatColor.ITALIC + "" + ChatColor.BOLD); add (ChatColor.WHITE + "" + ChatColor.ITALIC + "" + ChatColor.BOLD);
+		add(ChatColor.LIGHT_PURPLE + "" + ChatColor.ITALIC + "" + ChatColor.BOLD); add(ChatColor.WHITE + "" + ChatColor.ITALIC + "" + ChatColor.BOLD);
 	}};
 
 	@SuppressWarnings("unchecked")
