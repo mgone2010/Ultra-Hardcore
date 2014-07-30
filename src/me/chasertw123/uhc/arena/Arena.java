@@ -94,7 +94,7 @@ public class Arena {
 		if (!file.exists())
 			try {
 				plugin.sendConsole("Creating arena.yml...");
-				file = new File(plugin.getDataFolder(), "arenas.yml");
+				file.createNewFile();
 			} catch (Exception e) {
 				plugin.sendConsole("Creating arena.yml has failed!");
 				e.printStackTrace();
