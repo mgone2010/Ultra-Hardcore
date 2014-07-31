@@ -20,6 +20,7 @@ import org.bukkit.entity.Player;
 public class SpreadPlayers {
 	private static final Random random = new Random();
 	private Main plugin;
+	private static final Integer maxXZ = 900; // Players can spawn up to 905 blocks from 0, 0 in each axis
 
 	public SpreadPlayers(Main plugin) {
 		this.plugin = plugin;
@@ -36,7 +37,7 @@ public class SpreadPlayers {
 					players.add(p);
 				}
 
-		spread(w, players, getSpreadLocations(w, Team.teamObjects.size(), -1999, -1999, 1999, 1999));
+		spread(w, players, getSpreadLocations(w, Team.teamObjects.size(), -maxXZ, -maxXZ, maxXZ, maxXZ));
 	}
 
 
@@ -96,7 +97,7 @@ public class SpreadPlayers {
 		while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAVA && tries <= 10) {
 			tries++;
 			
-			if (loc.getX() < 1999)
+			if (loc.getX() < maxXZ)
 				loc.setX(l.getX() + 1);
 			else 
 				break;
@@ -113,7 +114,7 @@ public class SpreadPlayers {
 		while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAVA && tries <= 10) {
 			tries++;
 			
-			if (loc.getZ() < 1999)
+			if (loc.getZ() < maxXZ)
 				loc.setZ(l.getZ() + 1);
 			else 
 				break;
@@ -130,7 +131,7 @@ public class SpreadPlayers {
 		while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAVA && tries <= 10) {
 			tries++;
 			
-			if (loc.getZ() > -1999)
+			if (loc.getZ() > -maxXZ)
 				loc.setZ(l.getZ() - 1);
 			else 
 				break;
@@ -147,7 +148,7 @@ public class SpreadPlayers {
 		while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAVA && tries <= 10) {
 			tries++;
 			
-			if (loc.getX() > -1999)
+			if (loc.getX() > -maxXZ)
 				loc.setX(l.getX() - 1);
 			else 
 				break;
