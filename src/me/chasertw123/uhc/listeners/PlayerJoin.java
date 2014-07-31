@@ -28,8 +28,8 @@ public class PlayerJoin implements Listener {
 		
 		Arena a = plugin.getA();
 
-		if (a.getGameState() == GameState.STARTING || a.getGameState() == GameState.INGAME 
-				|| a.getGameState() == GameState.DEATHMATCH || a.getGameState() == GameState.ENDING)
+		if (a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH 
+				|| a.getGameState() == GameState.ENDING)
 			p.kickPlayer("UHC is currently in progress!");
 		
 		SQL sql = plugin.getSql();
@@ -56,7 +56,7 @@ public class PlayerJoin implements Listener {
 		
 		a.addPlayer(p);
 		
-		if (a.getGameState() == GameState.LOBBY)
+		if (a.getGameState() == GameState.LOBBY || a.getGameState() == GameState.STARTING)
 			p.teleport(plugin.getA().getLobby());
 		
 		p.setScoreboard(plugin.getSh().getScoreboard(p));

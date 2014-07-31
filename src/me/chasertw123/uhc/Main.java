@@ -8,6 +8,7 @@ import me.chasertw123.uhc.sql.SQL;
 import me.chasertw123.uhc.sql.SQLAPI;
 import me.chasertw123.uhc.teams.TeamManager;
 import me.chasertw123.uhc.utils.ServerConnector;
+import me.chasertw123.uhc.utils.SpreadPlayers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,6 +26,7 @@ public class Main extends JavaPlugin {
 	private ServerConnector sc = new ServerConnector(this);
 	private ScoreboardHandler sh = new ScoreboardHandler(this);
 	private TeamManager tm =  new TeamManager(this);
+	private SpreadPlayers sp =  new SpreadPlayers(this);
 	private Arena a;
 	
 	public void onEnable() {
@@ -106,5 +108,9 @@ public class Main extends JavaPlugin {
 	
 	public TeamManager getTm() {
 		return tm;
+	}
+	
+	public SpreadPlayers getSp() {
+		return sp;
 	}
 }

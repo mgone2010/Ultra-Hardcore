@@ -2,6 +2,7 @@ package me.chasertw123.uhc.handlers;
 
 import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.listeners.InventoryClick;
+import me.chasertw123.uhc.listeners.PlayerDeath;
 import me.chasertw123.uhc.listeners.PlayerInteract;
 import me.chasertw123.uhc.listeners.PlayerJoin;
 import me.chasertw123.uhc.listeners.PlayerKick;
@@ -18,6 +19,7 @@ public class ListenerHandler {
 		
 		pm.registerEvents(new InventoryClick(), plugin);
 		pm.registerEvents(new PlayerInteract(plugin), plugin);
+		pm.registerEvents(new PlayerDeath(plugin), plugin);
 		pm.registerEvents(new PlayerJoin(plugin), plugin);
 		pm.registerEvents(new PlayerKick(plugin), plugin);
 		pm.registerEvents(new PlayerQuit(plugin), plugin);
