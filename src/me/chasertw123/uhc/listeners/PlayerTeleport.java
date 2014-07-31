@@ -16,6 +16,9 @@ public class PlayerTeleport implements Listener{
 			// Prevent players to tp outside the walls. Blocks enderpearls, netherportals and other teleports.
 			e.getTo().setX(Math.min(999, Math.max(-999, e.getTo().getX())));
 			e.getTo().setZ(Math.min(999, Math.max(-999, e.getTo().getZ())));
+			
+			if (e.getTo().getX() == 999 || e.getTo().getX() == -999 || e.getTo().getZ() == 999 || e.getTo().getZ() == -999)
+				e.getTo().setY(e.getTo().getWorld().getHighestBlockYAt(e.getTo()));
 		} else {
 			e.getTo().setX(Math.min(124, Math.max(-124, e.getTo().getX())));
 			e.getTo().setZ(Math.min(124, Math.max(-124, e.getTo().getZ())));
