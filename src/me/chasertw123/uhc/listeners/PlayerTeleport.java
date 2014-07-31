@@ -22,6 +22,9 @@ public class PlayerTeleport implements Listener{
 		} else {
 			e.getTo().setX(Math.min(124, Math.max(-124, e.getTo().getX())));
 			e.getTo().setZ(Math.min(124, Math.max(-124, e.getTo().getZ())));
+
+			if (e.getTo().getX() == 124 || e.getTo().getX() == -124 || e.getTo().getZ() == 124 || e.getTo().getZ() == -124)
+				e.getTo().setY(e.getTo().getWorld().getHighestBlockYAt(e.getTo()));
 		}
 	}
 }
