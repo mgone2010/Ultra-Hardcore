@@ -49,8 +49,10 @@ public class TeamManager {
 	}
 
 	public void removePlayer(Player player) {
-		for (Team t : Team.teamObjects)
+		for (Team t : Team.teamObjects) {
 			if (t.getMembers().contains(player.getName()))
 				t.removePlayer(player.getName());
+			t.removeInvite(player.getName());
+		}
 	}
 }

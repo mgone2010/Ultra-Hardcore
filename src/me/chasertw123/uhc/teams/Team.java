@@ -9,6 +9,7 @@ public class Team {
 
 	private String creator;
 	private ArrayList<String> members;
+	private ArrayList<String> invites;
 	private String teamName;
 	private String prefix;
 	public static ArrayList<Team> teamObjects = new ArrayList<Team>();
@@ -44,7 +45,7 @@ public class Team {
 	@SuppressWarnings("unchecked")
 	public Team(String creator, String teamName) {
 		this.creator = creator;
-		this.members.add(creator);
+		addPlayer(creator);
 		this.teamName = teamName;
 
 		ArrayList<String> prefixes = (ArrayList<String>) teamColors.clone();
@@ -78,6 +79,8 @@ public class Team {
 	public void addPlayer(String m) {
 		sendMessage(m + " joined your team.");
 		members.add(m);
+		for (Team t : Team.teamObjects)
+			t.removeInvite(m);
 	}
 
 	public String getName() {
@@ -88,14 +91,36 @@ public class Team {
 		return prefix;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void removePlayer(String name) {
 		members.remove(name);
 		sendMessage(name + " left your team.");
+		
+		if (this.members.size() != 0)
+			this.creator = members.get(0);
+		else 
+			Team.teamObjects.remove(this);
+		
 		if (this.team != null)
 			team.removePlayer(Bukkit.getOfflinePlayer(name));
 	}
 	
 	public void setTeam(org.bukkit.scoreboard.Team t) {
 		this.team = t;
+	}
+
+	public ArrayList<String> getInvites() {
+		return invites;		
+	}
+	
+	public void addInvite(String name, String inviter) {
+		invites.add(name);
+		sendMessage(name + " got invited by " + inviter);
+	}
+	
+	public void removeInvite(String name) {
+		for (String s : invites)
+			if (s.equalsIgnoreCase(name))
+				invites.remove(s);
 	}
 }
