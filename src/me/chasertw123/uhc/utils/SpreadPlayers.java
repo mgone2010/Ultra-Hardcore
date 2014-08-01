@@ -20,14 +20,14 @@ import org.bukkit.entity.Player;
 public class SpreadPlayers {
 	private static final Random random = new Random();
 	private Main plugin;
-	private static final Integer maxXZ = 900; // Players can spawn up to 905 blocks from 0, 0 in each axis
+	public static final Integer maxXZ = 900; // Players can spawn up to 920 blocks from 0, 0 in each axis
 
 	public SpreadPlayers(Main plugin) {
 		this.plugin = plugin;
 	}
 
 	@SuppressWarnings("deprecation")
-	public void spreadPlayers(Arena a, World w) {
+	public void spreadPlayers(Arena a, Location[] locs, World w) {
 		List<Player> players = new ArrayList<Player>();
 
 		for (Team t : Team.teamObjects)
@@ -37,7 +37,7 @@ public class SpreadPlayers {
 					players.add(p);
 				}
 
-		spread(w, players, getSpreadLocations(w, Team.teamObjects.size(), -maxXZ, -maxXZ, maxXZ, maxXZ));
+		spread(w, players, locs);
 	}
 
 
@@ -64,19 +64,10 @@ public class SpreadPlayers {
 					Math.floor(location.getZ() + playerZOffset) + 0.5D);
 
 			player.teleport(makeSafe(loc));
-
-			double value = Double.MAX_VALUE;
-
-			for (int k = 0; k < locations.length; ++k) {
-				if (location != locations[k]) {
-					double d = location.distanceSquared(locations[k]);
-					value = Math.min(d, value);
-				}
-			}
 		}
 	}
 
-	private Location[] getSpreadLocations(World world, int size, double xRangeMin, double zRangeMin, double xRangeMax, double zRangeMax) {
+	public Location[] getSpreadLocations(World world, int size, double xRangeMin, double zRangeMin, double xRangeMax, double zRangeMax) {
 		Location[] locations = new Location[size];
 
 		for (int i = 0; i < size; ++i) {
