@@ -33,7 +33,13 @@ public class LobbyTimer extends BukkitRunnable {
 			BarAPI.setMessage(p, ChatColor.WHITE + "" + ChatColor.BOLD + "Ultra Hardcore starts in " + ChatColor.RED 
 					+ "" + ChatColor.BOLD + time + ChatColor.WHITE + "" + ChatColor.BOLD + " seconds!");
 			
-			if (time <= 5)
+			if (time == 10 || time == 30)
+				if (plugin.getTm().getTeam(p) != null)
+					if (plugin.getTm().getTeam(p).getMembers().size() < a.getArenaType().getPlayersPerTeam() / 2)
+						plugin.sendMessage(p, "The game is about to start and your team has less then half of the maximum allowed players" +
+								", this might be unfair for you, we recommend disbanding/leaving your team.");
+			
+			if (time <= 5) 
 				p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1F, 1F);
 		}
 		
