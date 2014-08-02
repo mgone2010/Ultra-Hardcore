@@ -10,6 +10,7 @@ import me.chasertw123.uhc.handlers.ScoreboardHandler;
 import me.chasertw123.uhc.sql.SQL;
 import me.chasertw123.uhc.sql.SQLAPI;
 import me.chasertw123.uhc.teams.TeamManager;
+import me.chasertw123.uhc.utils.BungeecordMessangerSender;
 import me.chasertw123.uhc.utils.ServerConnector;
 import me.chasertw123.uhc.utils.SpreadPlayers;
 
@@ -33,6 +34,7 @@ public class Main extends JavaPlugin {
 	private ScoreboardHandler sh = new ScoreboardHandler(this);
 	private TeamManager tm =  new TeamManager(this);
 	private SpreadPlayers sp =  new SpreadPlayers(this);
+	private BungeecordMessangerSender bms = new BungeecordMessangerSender(this);
 	private Arena a;
 	private Location[] locs = new Location[40];
 
@@ -166,5 +168,13 @@ public class Main extends JavaPlugin {
 
 	public Location[] getLocs() {
 		return locs;
+	}
+
+	public String getServerName() {
+		return getConfig().getString("server.current");
+	}
+
+	public BungeecordMessangerSender getBms() {
+		return bms;
 	}
 }

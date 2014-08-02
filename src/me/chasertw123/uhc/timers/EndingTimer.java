@@ -1,6 +1,7 @@
 package me.chasertw123.uhc.timers;
 
 import me.chasertw123.uhc.Main;
+import me.chasertw123.uhc.arena.Arena.GameState;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,6 +24,7 @@ public class EndingTimer extends BukkitRunnable{
 	public void run() {
 
 		if (time == 0 || Bukkit.getOnlinePlayers().length == 0) {
+			plugin.getA().setGameState(GameState.RESETING);
 			for (Player p : Bukkit.getOnlinePlayers())
 				p.kickPlayer(ChatColor.RED + "Server is now restarting \n Thanks for playing");
 			

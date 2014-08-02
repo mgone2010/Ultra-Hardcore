@@ -21,6 +21,7 @@ public class ListenerHandler {
 
 		PluginManager pm = plugin.getServer().getPluginManager();
 
+		plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
 		pm.registerEvents(new BlockPlace(plugin), plugin);
 		pm.registerEvents(new ChunkPopulate(plugin), plugin);
 		pm.registerEvents(new EntityRegainHealth(), plugin);

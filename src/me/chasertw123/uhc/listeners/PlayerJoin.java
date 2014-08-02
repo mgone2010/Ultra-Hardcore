@@ -8,10 +8,12 @@ import me.chasertw123.uhc.arena.Arena.GameState;
 import me.chasertw123.uhc.sql.SQL;
 import me.chasertw123.uhc.timers.LobbyTimer;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerJoin implements Listener {
 
@@ -71,5 +73,14 @@ public class PlayerJoin implements Listener {
 		plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
 		if (a.getArenaType().isAutoTeaming())
 			plugin.getTm().autoTeam(p, a.getArenaType());
+		
+		new BukkitRunnable() {
+			
+			@Override
+			public void run() {
+				if (Bukkit.getOnlinePlayers()[0] != null)
+					plugin.getBms().updatePlayers(Bukkit.getOnlinePlayers().length, Bukkit.getOnlinePlayers()[0]);
+			}
+		}.runTask(plugin);
 	}
 }

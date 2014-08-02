@@ -6,3 +6,4 @@ sql:
   database: mcph204640
 server:
   hub: hub
+  current: uhc1
