@@ -5,6 +5,7 @@ import java.util.Random;
 import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.arena.ArenaType;
+import me.chasertw123.uhc.teams.Team;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,6 +19,8 @@ public class GameTimer extends BukkitRunnable {
 	private boolean sixty = true, thirty = true, ten = true, five = true, one = true; 
 
 	private int time;
+	private boolean shortendDeadmatch = false;
+	private long shortendDeadmatchStart = 0;
 
 	public GameTimer(Main plugin, Arena a) {
 		this.plugin = plugin;
@@ -53,32 +56,49 @@ public class GameTimer extends BukkitRunnable {
 
 	@Override
 	public void run() {
+		long timeLeft = (shortendDeadmatch ? 60000 : time * 60000) - (System.currentTimeMillis() - (shortendDeadmatch ? shortendDeadmatchStart : a.getStartTime()));
 
-		if (a.getStartTime() + (time * 60 * 1000) >= System.currentTimeMillis()) {
+		if (Team.teamObjects.size() >= 3 && timeLeft / 1000 >= time * 45D && timeLeft / 1000 >= 60) { 
+			// timeLeft is in ms, we make it in sec, time is in minutes, we do it * 60 * .75 (shortend, * 45)
+			shortendDeadmatch = true;
+			shortendDeadmatchStart = System.currentTimeMillis();
+			sixty = false;
+			thirty = false;
+			ten = false;
+			five = false;
+			one = false;
+			
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				plugin.sendMessage(p, ChatColor.RED + "Deathmatch time has been shortend to 1 minute!");
+				plugin.sendMessage(p, ChatColor.GOLD + "1" + ChatColor.RED + " minute remaining till deathmatch! Prepare yourself for final battle!");
+			}
+		}
+		
+		if (timeLeft <= 0) {
 			new DeathmatchTimer(plugin);
 			this.cancel();
 
-		} else if (a.getStartTime() + (60 * 60000) >= System.currentTimeMillis() && sixty) {
+		} else if (timeLeft / 1000 <= 60 * 60 && sixty) {
 			for (Player p : Bukkit.getOnlinePlayers())
 				plugin.sendMessage(p, ChatColor.GOLD + "60" + ChatColor.RED + " minutes remaining till deathmatch!");
 			sixty = false;
 
-		} else if (a.getStartTime() + (60 * 30000) >= System.currentTimeMillis() && thirty) {
+		} else if (timeLeft / 1000 <= 60 * 30 && thirty) {
 			for (Player p : Bukkit.getOnlinePlayers())
 				plugin.sendMessage(p, ChatColor.GOLD + "30" + ChatColor.RED + " minutes remaining till deathmatch!");
 			thirty = false;
 
-		} else if (a.getStartTime() + (60 * 10000) >= System.currentTimeMillis() && ten) {
+		} else if (timeLeft / 1000 <= 60 * 10 && ten) {
 			for (Player p : Bukkit.getOnlinePlayers())
 				plugin.sendMessage(p, ChatColor.GOLD + "10" + ChatColor.RED + " minutes remaining till deathmatch!");
 			ten = false;
 
-		} else if (a.getStartTime() + (60 * 5000) >= System.currentTimeMillis() && five) {
+		} else if (timeLeft / 1000 <= 60 * 5 && five) {
 			for (Player p : Bukkit.getOnlinePlayers())
 				plugin.sendMessage(p, ChatColor.GOLD + "5" + ChatColor.RED + " minutes remaining till deathmatch! Start to prepare your self!");
 			five = false;
 
-		} else if (a.getStartTime() + (60 * 1000) >= System.currentTimeMillis() && one) {
+		} else if (timeLeft / 1000 <= 60 && one) {
 			for (Player p : Bukkit.getOnlinePlayers())
 				plugin.sendMessage(p, ChatColor.GOLD + "1" + ChatColor.RED + " minute remaining till deathmatch! Prepare yourself for final battle!");
 			one = false;
