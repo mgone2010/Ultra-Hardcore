@@ -74,7 +74,7 @@ public class GameTimer extends BukkitRunnable {
 			}
 		}
 		
-		if (a.getStartTime() + (time * 60 * 1000) >= System.currentTimeMillis()) {
+		if (timeLeft <= 0) {
 			new DeathmatchTimer(plugin);
 			this.cancel();
 
