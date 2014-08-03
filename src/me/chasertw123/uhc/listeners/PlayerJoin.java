@@ -29,6 +29,7 @@ public class PlayerJoin implements Listener {
 		Player p = e.getPlayer();
 		
 		Arena a = plugin.getA();
+		plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
 
 		if (a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH 
 				|| a.getGameState() == GameState.ENDING)
@@ -70,7 +71,6 @@ public class PlayerJoin implements Listener {
 			new LobbyTimer(plugin, a);
 		}
 
-		plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
 		if (a.getArenaType().isAutoTeaming())
 			plugin.getTm().autoTeam(p, a.getArenaType());
 		

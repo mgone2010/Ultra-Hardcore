@@ -25,7 +25,7 @@ public class PlayerQuit implements Listener{
 			
 			@Override
 			public void run() {
-				if (Bukkit.getOnlinePlayers()[0] != null)
+				if (Bukkit.getOnlinePlayers().length > 0)
 					plugin.getBms().updatePlayers(Bukkit.getOnlinePlayers().length, Bukkit.getOnlinePlayers()[0]);
 			}
 		}.runTask(plugin);

@@ -9,8 +9,6 @@ import me.chasertw123.uhc.Main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World.Environment;
-import org.bukkit.WorldType;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -30,9 +28,16 @@ public class Arena {
 	private ArenaType type;
 	public enum GameState{ LOBBY, STARTING, INGAME, DEATHMATCH, ENDING, RESETING, DISABLED; }
 
-	public Arena() {
+	public Arena(Main plugin) {
 
+		this.plugin = plugin;
 		this.tryCreateFile();
+
+		ArrayList<ArenaType> arenaTypes = new ArrayList<ArenaType>();
+		for (ArenaType at : ArenaType.values())
+			arenaTypes.add(at);
+
+		this.type = arenaTypes.get(new Random().nextInt(arenaTypes.size()));
 
 		if (!config.contains("arena.lobby") || !config.contains("arena.deathmatch"))
 			return;
@@ -42,17 +47,6 @@ public class Arena {
 
 		if (this.Deathmatch == null || this.Lobby == null)
 			return;
-
-		plugin.getMultiverseCore().getMVWorldManager().addWorld("UHC_world", Environment.NORMAL,
-				this.generateRandomSeed(20), WorldType.NORMAL, true, "");
-		plugin.getMultiverseCore().getMVWorldManager().addWorld("UHC_world_nether", Environment.NETHER,
-				this.generateRandomSeed(20), WorldType.NORMAL, true, "");
-
-		ArrayList<ArenaType> arenaTypes = new ArrayList<ArenaType>();
-		for (ArenaType at : ArenaType.values())
-			arenaTypes.add(at);
-
-		this.type = arenaTypes.get(new Random().nextInt(arenaTypes.size()));
 
 		this.setGameState(GameState.LOBBY);
 	}
@@ -112,19 +106,6 @@ public class Arena {
 			plugin.sendConsole("Saving arena.yml has failed!");
 			e.printStackTrace();
 		}
-	}
-
-	private String generateRandomSeed(int size) {
-
-		final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-		Random random = new Random();
-
-		StringBuilder sb = new StringBuilder(size);
-
-		for (int i = 0; i < size; i++)
-			sb.append(AB.charAt(random.nextInt(AB.length())));
-
-		return sb.toString();
 	}
 
 	public boolean addPlayer(Player p) {
