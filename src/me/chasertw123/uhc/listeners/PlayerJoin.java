@@ -64,7 +64,7 @@ public class PlayerJoin implements Listener {
 		
 		p.setScoreboard(plugin.getSh().getScoreboard(p));
 		
-		if (a.getPlayers().length >= a.getNeededPlayers() && a.getGameState() == GameState.LOBBY) {
+		if (a.getPlayers().size() >= a.getNeededPlayers() && a.getGameState() == GameState.LOBBY) {
 			
 			a.setGameState(GameState.STARTING);
 			

@@ -40,8 +40,8 @@ public class TeamCmd implements CommandExecutor {
 			 * Example: uhc.team.create
 			 */
 
-			if (plugin.getA().getGameState() != GameState.LOBBY) {
-				plugin.sendMessage(p, ChatColor.RED + "Cannot do this command when game is started/starting");
+			if (!(plugin.getA().getGameState() == GameState.LOBBY || plugin.getA().getGameState() == GameState.STARTING)) {
+				plugin.sendMessage(p, ChatColor.RED + "Cannot do this command when game is " + plugin.getA().getGameState());
 				return false;
 			}
 

@@ -7,11 +7,11 @@ import org.bukkit.ChatColor;
 
 public class Team {
 
-	private String creator;
-	private ArrayList<String> members;
-	private ArrayList<String> invites;
-	private String teamName;
-	private String prefix;
+	private String creator = "";
+	private ArrayList<String> members = new ArrayList<String>();
+	private ArrayList<String> invites = new ArrayList<String>();
+	private String teamName = "";
+	private String prefix = "";
 	public static ArrayList<Team> teamObjects = new ArrayList<Team>();
 	private org.bukkit.scoreboard.Team team = null;
 	@SuppressWarnings("serial")
