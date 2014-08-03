@@ -15,6 +15,9 @@ public class ChatHandler {
 	}
 	
 	public ChatType getChatType(Player p) {
-		return channel.get(p.getName());
+		if (channel.containsKey(p.getName()))
+			return channel.get(p.getName());
+		else
+			return ChatType.GLOBAL;
 	}
 }

@@ -9,6 +9,7 @@ depends: [Multiverse-Core]
 commands:
   admin:
     description: Admin command
+    permission: uhc.admin
   team:
     description: Team command
   chat:
@@ -18,4 +19,10 @@ commands:
 permissions:
   uhc.sign.create:
     description: Create UHC signs.
+    default: op
+  uhc.chat:
+    description: Be able to set your chat type.
+    default: true
+  uhc.admin:
+    description: Access to admin command and chat
     default: op

@@ -44,16 +44,16 @@ public class AdminCmd implements CommandExecutor {
 			else if (args.length == 1) {
 				
 				if (args[0].equalsIgnoreCase("setLobby")) {
-					
-					// TODO: Set the lobby location
-					
+					plugin.getA().getConfig().set("arena.lobby", plugin.serializeLoc(p.getLocation()));
+					plugin.getA().saveConfig();
+					plugin.sendMessage(p, ChatColor.GREEN + "Set lobby location!");
 					return true;
 				}
 				
 				else if (args[0].equalsIgnoreCase("setDeathmatch")) {
-					
-					// TODO: Set the deathmatch location
-					
+					plugin.getA().getConfig().set("arena.deathmatch", plugin.serializeLoc(p.getLocation()));
+					plugin.getA().saveConfig();
+					plugin.sendMessage(p, ChatColor.GREEN + "Set deathmatch location!");					
 					return true;
 				}
 				

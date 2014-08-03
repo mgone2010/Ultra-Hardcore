@@ -1,6 +1,7 @@
 package me.chasertw123.uhc;
 
 import me.chasertw123.uhc.arena.Arena;
+import me.chasertw123.uhc.handlers.ChatHandler;
 import me.chasertw123.uhc.handlers.CommandHandler;
 import me.chasertw123.uhc.handlers.ListenerHandler;
 import me.chasertw123.uhc.handlers.ScoreboardHandler;
@@ -30,6 +31,7 @@ public class Main extends JavaPlugin {
 	private TeamManager tm =  new TeamManager(this);
 	private SpreadPlayers sp =  new SpreadPlayers(this);
 	private BungeecordMessangerSender bms = new BungeecordMessangerSender(this);
+	private ChatHandler ch = new ChatHandler();
 	private Arena a;
 	public Location[] locs = new Location[40];
 
@@ -132,5 +134,9 @@ public class Main extends JavaPlugin {
 
 	public BungeecordMessangerSender getBms() {
 		return bms;
+	}
+
+	public ChatHandler getCh() {
+		return ch;
 	}
 }
