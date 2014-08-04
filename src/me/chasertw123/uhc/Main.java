@@ -71,20 +71,19 @@ public class Main extends JavaPlugin {
 	}
 
 	public String serializeLoc(Location l) {
-		return l.getWorld().getName() + ", " + l.getBlockX() + ", "
-				+ l.getBlockY() + ", " + l.getBlockZ() + ", " + l.getYaw()
-				+ ", " + l.getPitch();
+		return l.getWorld().getName() + ", " + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + ", " + l.getYaw() + ", " + l.getPitch();
 	}
 
 	public Location deserializeLoc(String s) {
 		String[] st = s.split(", ");
-		return new Location(Bukkit.getWorld(st[0]), Double.parseDouble(st[1]),
-				Double.parseDouble(st[2]), Double.parseDouble(st[3]),
-				Float.parseFloat(st[4]), Float.parseFloat(st[5]));
+		return new Location(Bukkit.getWorld(st[0]), Double.parseDouble(st[1]), Double.parseDouble(st[2]), 
+				Double.parseDouble(st[3]), Float.parseFloat(st[4]), Float.parseFloat(st[5]));
 	}
 
 	/************************************************
-	 * * Messages * *
+	 * 												*
+	 *					Messages					*
+	 * 												*
 	 ************************************************/
 
 	public String prefix = ChatColor.WHITE + "[" + ChatColor.AQUA + ""
@@ -99,7 +98,9 @@ public class Main extends JavaPlugin {
 	}
 
 	/************************************************
-	 * * Getters and Setters * *
+	 * 												*
+	 *				Getters and Setters				*
+	 * 												*
 	 ************************************************/
 
 	public SQL getSql() {
