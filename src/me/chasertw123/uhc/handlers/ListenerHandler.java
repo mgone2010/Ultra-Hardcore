@@ -7,6 +7,7 @@ import me.chasertw123.uhc.listeners.EntityRegainHealth;
 import me.chasertw123.uhc.listeners.InventoryClick;
 import me.chasertw123.uhc.listeners.PlayerDeath;
 import me.chasertw123.uhc.listeners.PlayerInteract;
+import me.chasertw123.uhc.listeners.PlayerJoin;
 import me.chasertw123.uhc.listeners.PlayerKick;
 import me.chasertw123.uhc.listeners.PlayerLogin;
 import me.chasertw123.uhc.listeners.PlayerQuit;
@@ -27,6 +28,7 @@ public class ListenerHandler {
 		pm.registerEvents(new EntityRegainHealth(), plugin);
 		pm.registerEvents(new InventoryClick(), plugin);
 		pm.registerEvents(new PlayerInteract(plugin), plugin);
+		pm.registerEvents(new PlayerJoin(plugin), plugin);
 		pm.registerEvents(new PlayerDeath(plugin), plugin);
 		pm.registerEvents(new PlayerKick(plugin), plugin);
 		pm.registerEvents(new PlayerLogin(plugin), plugin);

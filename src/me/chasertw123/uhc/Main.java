@@ -159,6 +159,6 @@ public class Main extends JavaPlugin {
 			else
 				return false;
 		else
-			return true;
+			return false;
 	}
 }

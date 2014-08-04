@@ -19,7 +19,7 @@ public class PlayerDeath implements Listener {
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent e) {
 		if (plugin.getA().getGameState() == GameState.DEATHMATCH || plugin.getA().getGameState() == GameState.INGAME) {
-			plugin.setLeaveTime(e.getEntity().getName(), 0L);
+			plugin.setLeaveTime(e.getEntity().getName(), Long.MAX_VALUE - 30001);
 			e.setDeathMessage(ChatColor.WHITE + "[" + ChatColor.AQUA + "" + ChatColor.ITALIC + "UHC" + ChatColor.WHITE + "] " + e.getDeathMessage());
 			e.getEntity().kickPlayer(e.getDeathMessage().replaceAll(e.getEntity().getName(), "You"));
 		}

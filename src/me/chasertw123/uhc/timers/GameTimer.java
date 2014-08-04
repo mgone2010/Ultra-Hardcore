@@ -67,14 +67,16 @@ public class GameTimer extends BukkitRunnable {
 			ten = false;
 			five = false;
 			one = false;
-			
+
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				plugin.sendMessage(p, ChatColor.RED + "Deathmatch time has been shortend to 1 minute!");
 				plugin.sendMessage(p, ChatColor.GOLD + "1" + ChatColor.RED + " minute remaining till deathmatch! Prepare yourself for final battle!");
 			}
 		}
-		
-		if (timeLeft <= 0) {
+
+		if (Team.teamObjects.size() <= 1)
+			new EndingTimer(plugin);
+		else if (timeLeft <= 0) {
 			new DeathmatchTimer(plugin);
 			for (Player p : Bukkit.getOnlinePlayers())
 				p.teleport(a.getDeathmatch());

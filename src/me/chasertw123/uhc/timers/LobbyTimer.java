@@ -7,6 +7,7 @@ import me.confuser.barapi.BarAPI;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -51,6 +52,11 @@ public class LobbyTimer extends BukkitRunnable {
 				p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1F, 1F);
 		}
 
+		if (a.getPlayers().size() == 0) {
+			cancel();
+			a.setGameState(GameState.LOBBY);
+		}
+
 		if (time == 0) {
 
 			for (String s : a.getPlayers()) {
@@ -62,7 +68,12 @@ public class LobbyTimer extends BukkitRunnable {
 				if (BarAPI.hasBar(p))
 					BarAPI.removeBar(p);
 
-				p.setLevel(0);
+				p.setExp(0);
+				p.setHealth(p.getMaxHealth());
+				p.setSaturation(20L);
+				p.setFoodLevel(20);
+				p.setGameMode(GameMode.SURVIVAL);
+
 				p.playSound(p.getLocation(), Sound.LEVEL_UP, 1F, 1F);
 				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200 , 4));
 
@@ -70,6 +81,7 @@ public class LobbyTimer extends BukkitRunnable {
 					plugin.getTm().autoTeam(p, a.getArenaType());
 			}
 
+			Bukkit.getWorld("UHC_world").setTime(0L);
 			plugin.getSh().start();
 			plugin.getSp().spreadPlayers(a, plugin.getLocs(), Bukkit.getWorld("UHC_world"));
 			// Give Items
