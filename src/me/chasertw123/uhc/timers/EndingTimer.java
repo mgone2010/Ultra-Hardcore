@@ -2,6 +2,7 @@ package me.chasertw123.uhc.timers;
 
 import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.arena.Arena.GameState;
+import me.chasertw123.uhc.teams.Team;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -16,6 +17,12 @@ public class EndingTimer extends BukkitRunnable{
 
 	public EndingTimer(Main plugin) {
 		this.plugin = plugin;
+		if (Team.teamObjects.size() > 0)
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				plugin.sendMessage(p, Team.teamObjects.get(0).getName() + " team won!");
+				p.setHealth(p.getMaxHealth());
+				p.setAllowFlight(true);
+			}
 
 		this.runTaskTimer(this.plugin, 20L, 20L);
 	}

@@ -16,7 +16,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.Boat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
@@ -63,11 +63,11 @@ public class SpreadPlayers {
 			double playerZOffset = random.nextInt(10) - 5;
 
 			Location loc = new Location(world, Math.floor(location.getX() + playerXOffset) + 0.5D, 
-					world.getHighestBlockYAt((int) (location.getX() + playerXOffset), (int) (location.getZ() + playerZOffset)), 
+					world.getHighestBlockYAt((int) (location.getX() + playerXOffset), (int) (location.getZ() + playerZOffset) + 1), 
 					Math.floor(location.getZ() + playerZOffset) + 0.5D);
 
 			if (loc.getBlock().getBiome() == Biome.OCEAN || loc.getBlock().getBiome() == Biome.DEEP_OCEAN) {
-				Entity boat = loc.getWorld().spawnEntity(loc, EntityType.BOAT);
+				Boat boat = (Boat) loc.getWorld().spawnEntity(loc, EntityType.BOAT);
 				boat.setPassenger(player);
 			}
 

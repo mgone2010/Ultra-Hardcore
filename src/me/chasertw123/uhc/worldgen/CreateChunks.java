@@ -25,50 +25,52 @@ public class CreateChunks extends BukkitRunnable {
 		plugin.locs = plugin.getSp().getSpreadLocations(w, 40, -maxXZ, -maxXZ,
 				maxXZ, maxXZ);
 		Integer currentTaskDelay = 0;
-		Integer chunks = 0;
 
 		for (Location loc : plugin.locs) {
 			final Chunk c = loc.getChunk();
 			currentTaskDelay++;
 
-			for (int xx = -5; xx <= 5; xx++)
-				for (int zz = -5; zz <= 5; zz++) {
+			final int count = currentTaskDelay;
+			new BukkitRunnable() {
 
-					final int x = xx;
-					final int z = zz;
-					chunks++;
+				@Override
+				public void run() {
 
-					new BukkitRunnable() {
+					for (int xx = -5; xx <= 5; xx++)
+						for (int zz = -5; zz <= 5; zz++) 
+							w.getChunkAt(c.getX() + xx, c.getZ() + zz).load(true);
 
-						@Override
-						public void run() {
-							w.getChunkAt(c.getX() + x, c.getZ() + z).load(true);
-
-							if (w.getLoadedChunks().length > 2000) {
-								for (Chunk s : w.getLoadedChunks())
-									s.unload(true, true);
-								System.err
-										.println("|Over 2k chunks loaded, reduced to "
-												+ w.getLoadedChunks().length);
-								System.gc();
-							}
-						}
-					}.runTaskLater(plugin, currentTaskDelay);
+					System.out.println("* Generated batch " + count + " out of 40");
+					if (w.getLoadedChunks().length > 2000) {
+						System.err.println("! Cleaning chunks from "
+								+ w.getLoadedChunks().length);
+						for (Chunk s : w.getLoadedChunks())
+							s.unload(true, true);
+						System.gc();
+						System.err.println("! Cleaned chunks to "
+								+ w.getLoadedChunks().length);
+					}
 				}
-
+			}.runTaskLater(plugin, currentTaskDelay);
 		}
+
+
 		new BukkitRunnable() {
 
 			@Override
 			public void run() {
+				System.err.println("! Cleaning chunks from "
+						+ w.getLoadedChunks().length);
 				for (Chunk s : w.getLoadedChunks())
 					s.unload(true, true);
-				System.out.println("\\** Generation done **/");
 				System.gc();
+				System.err.println("! Cleaned chunks to "
+						+ w.getLoadedChunks().length);
+				System.out.println("\\** Generation done **/");
 			}
 		}.runTaskLater(plugin, currentTaskDelay + 1);
 
-		System.out.println("/** Generating " + chunks + " chunks spread over "
+		System.out.println("/** Generating " + 4840 + " chunks spread over "
 				+ currentTaskDelay + " batches **\\");
 	}
 }

@@ -18,6 +18,7 @@ public class PlayerKick implements Listener{
 
 	@EventHandler
 	public void onPlayerKick (PlayerKickEvent e) {
+		plugin.setLeaveTime(e.getPlayer().getName(), System.currentTimeMillis());
 		plugin.getA().removePlayer(e.getPlayer());
 		plugin.getTm().removePlayer(e.getPlayer());
 

@@ -6,6 +6,7 @@ import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.arena.Arena.GameState;
 import me.chasertw123.uhc.sql.SQL;
+import me.chasertw123.uhc.teams.Team;
 import me.chasertw123.uhc.timers.LobbyTimer;
 
 import org.bukkit.Bukkit;
@@ -30,10 +31,17 @@ public class PlayerJoin implements Listener {
 		
 		Arena a = plugin.getA();
 		
-		if (plugin.canRejoin(p.getName()))
+		if (plugin.canRejoin(p.getName())) {
 			plugin.sendMessage(p, "Succesfully rejoined this game!");
-		else
+			for (Team t : Team.teamObjects) {
+				if (t.getAllMembers().contains(p.getName()))
+					t.addPlayer(p.getName());
+			}
+		}else {
 			plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
+			p.getInventory().clear();
+			p.getEnderChest().clear();
+		}
 
 		if ((a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH 
 				|| a.getGameState() == GameState.ENDING) && !plugin.canRejoin(p.getName())) {

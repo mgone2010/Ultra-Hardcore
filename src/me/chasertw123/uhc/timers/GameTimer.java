@@ -74,9 +74,10 @@ public class GameTimer extends BukkitRunnable {
 			}
 		}
 
-		if (Team.teamObjects.size() <= 1)
+		if (Team.teamObjects.size() <= 1) {
 			new EndingTimer(plugin);
-		else if (timeLeft <= 0) {
+			this.cancel();
+		}else if (timeLeft <= 0) {
 			new DeathmatchTimer(plugin);
 			for (Player p : Bukkit.getOnlinePlayers())
 				p.teleport(a.getDeathmatch());

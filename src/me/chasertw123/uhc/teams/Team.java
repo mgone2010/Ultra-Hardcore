@@ -77,6 +77,10 @@ public class Team {
 		return members;
 	}
 
+	public ArrayList<String> getAllMembers() {
+		return allMembers;
+	}
+
 	public void addPlayer(String m) {
 		sendMessage(m + " joined your team.");
 		allMembers.add(m);
