@@ -1,5 +1,7 @@
 package me.chasertw123.uhc;
 
+import java.util.HashMap;
+
 import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.handlers.ChatHandler;
 import me.chasertw123.uhc.handlers.CommandHandler;
@@ -24,12 +26,13 @@ import com.onarandombox.MultiverseCore.MultiverseCore;
 
 public class Main extends JavaPlugin {
 
+	private HashMap<String, Long> leaveTimes = new HashMap<String, Long>();
 	private SQL sql = new SQL(this);
 	private SQLAPI api = new SQLAPI(sql);
 	private ServerConnector sc = new ServerConnector(this);
 	private ScoreboardHandler sh = new ScoreboardHandler(this);
-	private TeamManager tm =  new TeamManager(this);
-	private SpreadPlayers sp =  new SpreadPlayers(this);
+	private TeamManager tm = new TeamManager(this);
+	private SpreadPlayers sp = new SpreadPlayers(this);
 	private BungeecordMessangerSender bms = new BungeecordMessangerSender(this);
 	private ChatHandler ch = new ChatHandler();
 	private Arena a;
@@ -43,19 +46,22 @@ public class Main extends JavaPlugin {
 
 		new CommandHandler(this);
 		new ListenerHandler(this);
-		
+
 		new WorldGenStarter(this);
 	}
 
 	public void onDisable() {
 		if (Bukkit.getWorld("UHC_world") != null)
-			getMultiverseCore().getMVWorldManager().deleteWorld("UHC_world", true);
+			getMultiverseCore().getMVWorldManager().deleteWorld("UHC_world",
+					true);
 		if (Bukkit.getWorld("UHC_world_nether") != null)
-			getMultiverseCore().getMVWorldManager().deleteWorld("UHC_world_nether", true);
+			getMultiverseCore().getMVWorldManager().deleteWorld(
+					"UHC_world_nether", true);
 	}
 
 	public MultiverseCore getMultiverseCore() {
-		Plugin plugin = getServer().getPluginManager().getPlugin("Multiverse-Core");
+		Plugin plugin = getServer().getPluginManager().getPlugin(
+				"Multiverse-Core");
 
 		if (plugin instanceof MultiverseCore) {
 			return (MultiverseCore) plugin;
@@ -64,26 +70,28 @@ public class Main extends JavaPlugin {
 		throw new RuntimeException("MultiVerse not found!");
 	}
 
-	public String serializeLoc(Location l){
-		return l.getWorld().getName() + ", " + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + ", " + l.getYaw() + ", " + l.getPitch();
+	public String serializeLoc(Location l) {
+		return l.getWorld().getName() + ", " + l.getBlockX() + ", "
+				+ l.getBlockY() + ", " + l.getBlockZ() + ", " + l.getYaw()
+				+ ", " + l.getPitch();
 	}
 
-	public Location deserializeLoc(String s){
+	public Location deserializeLoc(String s) {
 		String[] st = s.split(", ");
-		return new Location(Bukkit.getWorld(st[0]), Double.parseDouble(st[1]), Double.parseDouble(st[2]), 
-				Double.parseDouble(st[3]), Float.parseFloat(st[4]), Float.parseFloat(st[5]));
+		return new Location(Bukkit.getWorld(st[0]), Double.parseDouble(st[1]),
+				Double.parseDouble(st[2]), Double.parseDouble(st[3]),
+				Float.parseFloat(st[4]), Float.parseFloat(st[5]));
 	}
 
 	/************************************************
-	 * 												*
-	 *					Messages					*
-	 * 												*
+	 * * Messages * *
 	 ************************************************/
 
-	public String prefix = ChatColor.WHITE + "[" + ChatColor.AQUA + "" + ChatColor.ITALIC + "UHC" + ChatColor.WHITE + "] ";
+	public String prefix = ChatColor.WHITE + "[" + ChatColor.AQUA + ""
+			+ ChatColor.ITALIC + "UHC" + ChatColor.WHITE + "] ";
 
 	public void sendMessage(Player p, String message) {
-		p.sendMessage(prefix + message); 
+		p.sendMessage(prefix + message);
 	}
 
 	public void sendConsole(String message) {
@@ -91,9 +99,7 @@ public class Main extends JavaPlugin {
 	}
 
 	/************************************************
-	 * 												*
-	 *				Getters and Setters				*
-	 * 												*
+	 * * Getters and Setters * *
 	 ************************************************/
 
 	public SQL getSql() {
@@ -138,5 +144,20 @@ public class Main extends JavaPlugin {
 
 	public ChatHandler getCh() {
 		return ch;
+	}
+
+	public void setLeaveTime(String name, Long time) {
+		if (!leaveTimes.containsKey(name))
+			leaveTimes.put(name, time);
+	}
+
+	public boolean canRejoin(String name) {
+		if (leaveTimes.containsKey(name))
+			if (leaveTimes.get(name) + 30000 <= System.currentTimeMillis())
+				return true;
+			else
+				return false;
+		else
+			return true;
 	}
 }

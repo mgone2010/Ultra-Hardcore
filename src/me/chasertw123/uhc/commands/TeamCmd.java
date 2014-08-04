@@ -82,7 +82,7 @@ public class TeamCmd implements CommandExecutor {
 								if (t.getCreator().equalsIgnoreCase(p.getName())) 
 									plugin.sendMessage(p, "You cannot leave your team as the creator, disband it.");
 								else {
-									t.removePlayer(p.getName());
+									t.removePlayer(p.getName(), true);
 									plugin.sendMessage(p, "You have left your team.");
 								}
 							} else
@@ -313,7 +313,7 @@ public class TeamCmd implements CommandExecutor {
 								if (plugin.getTm().getTeam(p) != null) 
 									if (plugin.getTm().getTeam(Bukkit.getPlayerExact(args[1])) == plugin.getTm().getTeam(p))
 										if (plugin.getTm().getTeam(p).getCreator() == p.getName()) {
-											plugin.getTm().getTeam(p).removePlayer(args[1]);
+											plugin.getTm().getTeam(p).removePlayer(args[1], true);
 											plugin.getTm().getTeam(p).sendMessage(p.getName() + " kicked " + args[1] + " out of the team! D:");
 										} else
 											plugin.sendMessage(p, ChatColor.RED + "You are not creator of this team!");

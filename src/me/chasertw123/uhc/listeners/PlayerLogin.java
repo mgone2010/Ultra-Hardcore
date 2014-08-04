@@ -12,28 +12,34 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class PlayerJoin implements Listener {
+public class PlayerLogin implements Listener {
 
 	private Main plugin;
 	
-	public PlayerJoin(Main plugin) {
+	public PlayerLogin(Main plugin) {
 		this.plugin = plugin;
 	}
 
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent e) {
+	public void onPlayerJoin(PlayerLoginEvent e) {
 		
 		Player p = e.getPlayer();
 		
 		Arena a = plugin.getA();
-		plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
+		
+		if (plugin.canRejoin(p.getName()))
+			plugin.sendMessage(p, "Succesfully rejoined this game!");
+		else
+			plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
 
-		if (a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH 
-				|| a.getGameState() == GameState.ENDING) {
-			p.kickPlayer("UHC is currently in progress!");
+		if ((a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH 
+				|| a.getGameState() == GameState.ENDING) && !plugin.canRejoin(p.getName())) {
+			e.disallow(Result.KICK_OTHER, "UHC is currently in progress!");
+			// p.kickPlayer("UHC is currently in progress!");
 			return;
 		}
 		

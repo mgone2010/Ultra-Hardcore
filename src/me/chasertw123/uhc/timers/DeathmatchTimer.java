@@ -1,6 +1,7 @@
 package me.chasertw123.uhc.timers;
 
 import me.chasertw123.uhc.Main;
+import me.chasertw123.uhc.teams.Team;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -20,9 +21,10 @@ public class DeathmatchTimer extends BukkitRunnable{
 	@Override
 	public void run() {
 
-		if (time == 0)
+		if (time == 0 || Team.teamObjects.size() <= 1) {
 			new EndingTimer(plugin);
-		else if (time % 60 == 0)
+			cancel();
+		}else if (time % 60 == 0)
 			for (Player p : Bukkit.getOnlinePlayers())
 				plugin.sendMessage(p, "Dead match ends in " + time + " seconds!");
 

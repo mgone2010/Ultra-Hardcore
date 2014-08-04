@@ -9,6 +9,7 @@ public class Team {
 
 	private String creator = "";
 	private ArrayList<String> members = new ArrayList<String>();
+	private ArrayList<String> allMembers = new ArrayList<String>();
 	private ArrayList<String> invites = new ArrayList<String>();
 	private String teamName = "";
 	private String prefix = "";
@@ -78,6 +79,7 @@ public class Team {
 
 	public void addPlayer(String m) {
 		sendMessage(m + " joined your team.");
+		allMembers.add(m);
 		members.add(m);
 		for (Team t : Team.teamObjects)
 			t.removeInvite(m);
@@ -92,11 +94,13 @@ public class Team {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void removePlayer(String name) {
+	public void removePlayer(String name, boolean removeFromAll) {
+		if (removeFromAll)
+			allMembers.remove(name);
 		members.remove(name);
 		sendMessage(name + " left your team.");
 		
-		if (this.members.size() != 0)
+		if (this.members.size() != 0 && name != this.creator)
 			this.creator = members.get(0);
 		else 
 			Team.teamObjects.remove(this);

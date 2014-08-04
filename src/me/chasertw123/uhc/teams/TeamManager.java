@@ -1,7 +1,10 @@
 package me.chasertw123.uhc.teams;
 
+import java.util.ArrayList;
+
 import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.arena.ArenaType;
+import me.chasertw123.uhc.arena.Arena.GameState;
 
 import org.bukkit.entity.Player;
 
@@ -43,15 +46,17 @@ public class TeamManager {
 				plugin.sendMessage(p, "You got automatically put in the " + t.getName() + " team.");
 				return;
 			}
-		
+
 		plugin.sendMessage(p, "You got automatically in a new team.");
 		plugin.getTm().createTeam(p);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void removePlayer(Player player) {
-		for (Team t : Team.teamObjects) {
-			if (t.getMembers().contains(player.getName()))
-				t.removePlayer(player.getName());
+		for (Team t : (ArrayList<Team>) Team.teamObjects.clone()) {
+			if (t.getMembers().contains(player.getName())) 
+				t.removePlayer(player.getName(), plugin.getA().getGameState() == GameState.LOBBY 
+				|| plugin.getA().getGameState() == GameState.STARTING);
 			t.removeInvite(player.getName());
 		}
 	}
