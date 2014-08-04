@@ -23,6 +23,8 @@ public class LobbyTimer extends BukkitRunnable {
 	public LobbyTimer(Main plugin, Arena a) {
 		this.plugin = plugin;
 		this.a = a;
+		
+		this.runTaskTimer(plugin, 20L, 20L);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -34,6 +36,7 @@ public class LobbyTimer extends BukkitRunnable {
 				return;
 
 			Player p = Bukkit.getPlayerExact(s);
+			p.setLevel(time);
 
 			BarAPI.setMessage(p, ChatColor.WHITE + "" + ChatColor.BOLD + "Ultra Hardcore starts in " + ChatColor.RED 
 					+ "" + ChatColor.BOLD + time + ChatColor.WHITE + "" + ChatColor.BOLD + " seconds!");
@@ -59,6 +62,7 @@ public class LobbyTimer extends BukkitRunnable {
 				if (BarAPI.hasBar(p))
 					BarAPI.removeBar(p);
 
+				p.setLevel(0);
 				p.playSound(p.getLocation(), Sound.LEVEL_UP, 1F, 1F);
 				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200 , 4));
 

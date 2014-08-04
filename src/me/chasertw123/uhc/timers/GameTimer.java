@@ -58,7 +58,7 @@ public class GameTimer extends BukkitRunnable {
 	public void run() {
 		long timeLeft = (shortendDeadmatch ? 60000 : time * 60000) - (System.currentTimeMillis() - (shortendDeadmatch ? shortendDeadmatchStart : a.getStartTime()));
 
-		if (Team.teamObjects.size() <= 3 && timeLeft / 1000 >= time * 45D && timeLeft / 1000 >= 60) { 
+		if (Team.teamObjects.size() <= 3 && timeLeft / 1000 < time * 45D && timeLeft / 1000 >= 60) { 
 			// timeLeft is in ms, we make it in sec, time is in minutes, we do it * 60 * .75 (shortend, * 45)
 			shortendDeadmatch = true;
 			shortendDeadmatchStart = System.currentTimeMillis();
@@ -76,6 +76,8 @@ public class GameTimer extends BukkitRunnable {
 		
 		if (timeLeft <= 0) {
 			new DeathmatchTimer(plugin);
+			for (Player p : Bukkit.getOnlinePlayers())
+				p.teleport(a.getDeathmatch());
 			this.cancel();
 
 		} else if (timeLeft / 1000 <= 60 * 60 && sixty) {

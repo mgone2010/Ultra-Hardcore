@@ -32,8 +32,10 @@ public class PlayerJoin implements Listener {
 		plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
 
 		if (a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH 
-				|| a.getGameState() == GameState.ENDING)
+				|| a.getGameState() == GameState.ENDING) {
 			p.kickPlayer("UHC is currently in progress!");
+			return;
+		}
 		
 		SQL sql = plugin.getSql();
 		
@@ -78,7 +80,7 @@ public class PlayerJoin implements Listener {
 			
 			@Override
 			public void run() {
-				if (Bukkit.getOnlinePlayers()[0] != null)
+				if (Bukkit.getOnlinePlayers().length > 0)
 					plugin.getBms().updatePlayers(Bukkit.getOnlinePlayers().length, Bukkit.getOnlinePlayers()[0]);
 			}
 		}.runTask(plugin);
