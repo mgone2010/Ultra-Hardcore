@@ -1,8 +1,8 @@
 package me.chasertw123.uhc.listeners;
 
-import java.util.Arrays;
+//import java.util.Arrays;
 
-import org.bukkit.Bukkit;
+//import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
@@ -11,12 +11,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.Inventory;
+//import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+//import org.bukkit.inventory.meta.ItemMeta;
 
 import me.chasertw123.uhc.Main;
-import me.chasertw123.uhc.sql.SQLAPI.StatType;
+//import me.chasertw123.uhc.sql.SQLAPI.StatType;
 
 public class PlayerInteract implements Listener {
 
@@ -56,7 +56,7 @@ public class PlayerInteract implements Listener {
 				p.getInventory().addItem(new ItemStack(material, amount));
 				p.updateInventory();
 			}
-			
+			/*
 			else if (sign.getLine(0).contains(ChatColor.WHITE + "[" + ChatColor.AQUA + "Stats" + ChatColor.WHITE + "]")) {
 				
 				if (sign.getLine(1).isEmpty() || sign.getLine(2).isEmpty() || sign.getLine(3).isEmpty())
@@ -82,10 +82,10 @@ public class PlayerInteract implements Listener {
 				inv.addItem(this.createFancyItemStack(Material.GOLDEN_APPLE, 0, (short) 1, ChatColor.GREEN + "Golden Apples Ate", "", ChatColor.WHITE + "" + ChatColor.ITALIC + "You have ate " + ChatColor.GOLD + plugin.getAPI().getStat(StatType.APPLES_ATE, p) + ChatColor.WHITE + "" + ChatColor.ITALIC + " golden apples!"));
 			
 				p.openInventory(inv);
-			}
+			}*/
 		}
 	}
-	
+	/*
 	private ItemStack createFancyItemStack(Material material, int amount, short data, String displayName, String... lore) {
 		
 		ItemStack i = new ItemStack(material, amount, data);
@@ -97,5 +97,5 @@ public class PlayerInteract implements Listener {
 		i.setItemMeta(im);
 		
 		return i;
-	}
+	}*/
 }

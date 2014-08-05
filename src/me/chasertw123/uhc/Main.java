@@ -10,8 +10,8 @@ import me.chasertw123.uhc.handlers.ListenerHandler;
 import me.chasertw123.uhc.handlers.RandomChestHandler;
 import me.chasertw123.uhc.handlers.RecipeHandler;
 import me.chasertw123.uhc.handlers.ScoreboardHandler;
-import me.chasertw123.uhc.sql.SQL;
-import me.chasertw123.uhc.sql.SQLAPI;
+//import me.chasertw123.uhc.sql.SQL;
+//import me.chasertw123.uhc.sql.SQLAPI;
 import me.chasertw123.uhc.teams.TeamManager;
 import me.chasertw123.uhc.utils.BungeecordMessangerSender;
 import me.chasertw123.uhc.utils.ServerConnector;
@@ -30,8 +30,8 @@ import com.onarandombox.MultiverseCore.MultiverseCore;
 public class Main extends JavaPlugin {
 
 	private HashMap<String, Long> leaveTimes = new HashMap<String, Long>();
-	private SQL sql = new SQL(this);
-	private SQLAPI api = new SQLAPI(sql);
+	//private SQL sql = new SQL(this);
+	//private SQLAPI api = new SQLAPI(sql);
 	private ServerConnector sc = new ServerConnector(this);
 	private ScoreboardHandler sh = new ScoreboardHandler(this);
 	private TeamManager tm = new TeamManager(this);
@@ -107,7 +107,7 @@ public class Main extends JavaPlugin {
 	 *				Getters and Setters				*
 	 * 												*
 	 ************************************************/
-
+/*
 	public SQL getSql() {
 		return sql;
 	}
@@ -115,7 +115,7 @@ public class Main extends JavaPlugin {
 	public SQLAPI getAPI() {
 		return api;
 	}
-
+*/
 	public ServerConnector getSc() {
 		return sc;
 	}

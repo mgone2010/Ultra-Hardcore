@@ -1,11 +1,11 @@
 package me.chasertw123.uhc.handlers;
 
 import me.chasertw123.uhc.Main;
-import me.chasertw123.uhc.sql.SQLAPI.StatType;
+//import me.chasertw123.uhc.sql.SQLAPI.StatType;
 import me.chasertw123.uhc.teams.Team;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+//import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -13,6 +13,7 @@ import org.bukkit.scoreboard.Scoreboard;
 
 public class ScoreboardHandler {
 
+	@SuppressWarnings("unused")
 	private Main plugin;
 	
 	public ScoreboardHandler(Main plugin) {
@@ -46,7 +47,7 @@ public class ScoreboardHandler {
 			p.damage(0.01D);
 		}
 	}
-		
+	/*	
 	public Scoreboard getScoreboard(Player p) {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = board.registerNewObjective(p.getName(), "dummy");
@@ -79,4 +80,5 @@ public class ScoreboardHandler {
 		// Used to prevent numbers that are higher then 16 chars (including color codes)
 		return s.substring(0, Math.min(s.length(), 16));
 	}
+	*/
 }

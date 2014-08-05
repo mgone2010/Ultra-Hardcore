@@ -1,11 +1,11 @@
 package me.chasertw123.uhc.listeners;
 
-import java.sql.PreparedStatement;
+//import java.sql.PreparedStatement;
 
 import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.arena.Arena.GameState;
-import me.chasertw123.uhc.sql.SQL;
+//import me.chasertw123.uhc.sql.SQL;
 import me.chasertw123.uhc.teams.Team;
 import me.chasertw123.uhc.timers.LobbyTimer;
 
@@ -49,7 +49,7 @@ public class PlayerJoin implements Listener {
 			p.kickPlayer("UHC is currently in progress!");
 			return;
 		}
-		
+		/*
 		SQL sql = plugin.getSql();
 		
 		sql.openConnection();
@@ -71,13 +71,13 @@ public class PlayerJoin implements Listener {
 		} finally {
 			sql.closeConnection();
 		}
-		
+		*/
 		a.addPlayer(p);
 		
 		if (a.getGameState() == GameState.LOBBY || a.getGameState() == GameState.STARTING)
 			p.teleport(plugin.getA().getLobby());
 		
-		p.setScoreboard(plugin.getSh().getScoreboard(p));
+		// p.setScoreboard(plugin.getSh().getScoreboard(p));
 		
 		if (a.getPlayers().size() >= a.getNeededPlayers() && a.getGameState() == GameState.LOBBY) {
 			
