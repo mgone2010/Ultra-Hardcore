@@ -8,6 +8,7 @@ import me.chasertw123.uhc.handlers.ChatHandler;
 import me.chasertw123.uhc.handlers.CommandHandler;
 import me.chasertw123.uhc.handlers.ListenerHandler;
 import me.chasertw123.uhc.handlers.RandomChestHandler;
+import me.chasertw123.uhc.handlers.RecipeHandler;
 import me.chasertw123.uhc.handlers.ScoreboardHandler;
 import me.chasertw123.uhc.sql.SQL;
 import me.chasertw123.uhc.sql.SQLAPI;
@@ -49,6 +50,7 @@ public class Main extends JavaPlugin {
 
 		new CommandHandler(this);
 		new ListenerHandler(this);
+		new RecipeHandler(this);
 
 		new WorldGenStarter(this);
 	}
