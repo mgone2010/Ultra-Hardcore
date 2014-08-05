@@ -24,8 +24,9 @@ public class ScoreboardHandler {
 	public void start() {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = board.registerNewObjective("Health", "health");
-		obj.setDisplaySlot(DisplaySlot.PLAYER_LIST); // Health on top.
 		obj.setDisplaySlot(DisplaySlot.BELOW_NAME); // Health under name.
+		Objective obj2 = board.registerNewObjective("Health2", "health");
+		obj2.setDisplaySlot(DisplaySlot.PLAYER_LIST); // Health on top.
 		
 		for (Team t : Team.teamObjects) {
 			org.bukkit.scoreboard.Team team = board.registerNewTeam(t.getName());

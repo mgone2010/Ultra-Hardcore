@@ -154,7 +154,7 @@ public class Main extends JavaPlugin {
 
 	public boolean canRejoin(String name) {
 		if (leaveTimes.containsKey(name))
-			if (leaveTimes.get(name) + 30000 <= System.currentTimeMillis())
+			if (leaveTimes.get(name) + 30000 > System.currentTimeMillis())
 				return true;
 			else
 				return false;
