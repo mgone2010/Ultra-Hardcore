@@ -37,7 +37,9 @@ public class PlayerJoin implements Listener {
 				if (t.getAllMembers().contains(p.getName()))
 					t.addPlayer(p.getName());
 			}
-		}else {
+			plugin.getSh().start(false);
+			return;
+		} else {
 			plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
 			p.getInventory().clear();
 			p.getEnderChest().clear();

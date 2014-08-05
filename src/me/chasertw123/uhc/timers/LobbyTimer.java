@@ -83,7 +83,7 @@ public class LobbyTimer extends BukkitRunnable {
 			}
 
 			Bukkit.getWorld("UHC_world").setTime(0L);
-			plugin.getSh().start();
+			plugin.getSh().start(true);
 			plugin.getSp().spreadPlayers(a, plugin.getLocs(), Bukkit.getWorld("UHC_world"));
 			// Give Items
 			// Freeze Them

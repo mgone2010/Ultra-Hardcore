@@ -22,7 +22,7 @@ public class ScoreboardHandler {
 	
 	// Run this on start of the arena
 	@SuppressWarnings("deprecation")
-	public void start() {
+	public void start(boolean shouldDamage) {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = board.registerNewObjective("Health", "health");
 		obj.setDisplaySlot(DisplaySlot.BELOW_NAME); // Health under name.
@@ -44,7 +44,8 @@ public class ScoreboardHandler {
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			p.setScoreboard(board);
-			p.damage(0.01D);
+			if (shouldDamage)
+				p.damage(0.01D);
 		}
 	}
 	/*	
