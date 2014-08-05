@@ -19,8 +19,8 @@ public class Arena {
 
 	private ArrayList<String> players = new ArrayList<String>();
 	private GameState gameState = GameState.DISABLED;
-	// private int neededPlayers = 15, maxPlayers = 40, donatorSlots = 10;
-	private int neededPlayers = 2, maxPlayers = 40, donatorSlots = 10;
+	private int neededPlayers = 15, maxPlayers = 40, donatorSlots = 10;
+	// private int neededPlayers = 2, maxPlayers = 40, donatorSlots = 10;
 	private long startTime = 0;
 	private Location Lobby = null;
 
@@ -41,7 +41,7 @@ public class Arena {
 		this.type = arenaTypes.get(new Random().nextInt(arenaTypes.size()));
 		this.type = ArenaType.SOLO;
 
-		if (!config.contains("arena.lobby") || !config.contains("arena.deathmatch"))
+		if (!config.contains("arena.lobby"))
 			return;
 
 		this.Lobby = plugin.deserializeLoc(config.getString("arena.lobby"));
