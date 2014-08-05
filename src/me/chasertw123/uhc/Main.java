@@ -3,9 +3,11 @@ package me.chasertw123.uhc;
 import java.util.HashMap;
 
 import me.chasertw123.uhc.arena.Arena;
+import me.chasertw123.uhc.arena.Arena.GameState;
 import me.chasertw123.uhc.handlers.ChatHandler;
 import me.chasertw123.uhc.handlers.CommandHandler;
 import me.chasertw123.uhc.handlers.ListenerHandler;
+import me.chasertw123.uhc.handlers.RandomChestHandler;
 import me.chasertw123.uhc.handlers.ScoreboardHandler;
 import me.chasertw123.uhc.sql.SQL;
 import me.chasertw123.uhc.sql.SQLAPI;
@@ -35,6 +37,7 @@ public class Main extends JavaPlugin {
 	private SpreadPlayers sp = new SpreadPlayers(this);
 	private BungeecordMessangerSender bms = new BungeecordMessangerSender(this);
 	private ChatHandler ch = new ChatHandler();
+	private RandomChestHandler rch = new RandomChestHandler();
 	private Arena a;
 	public Location[] locs = new Location[40];
 
@@ -147,8 +150,12 @@ public class Main extends JavaPlugin {
 		return ch;
 	}
 
+	public RandomChestHandler getRch() {
+		return rch;
+	}
+
 	public void setLeaveTime(String name, Long time) {
-		if (!leaveTimes.containsKey(name))
+		if (!leaveTimes.containsKey(name) && (a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH))
 			leaveTimes.put(name, time);
 	}
 

@@ -20,6 +20,7 @@ public class LobbyTimer extends BukkitRunnable {
 	private Arena a;
 
 	private int time = 180;
+	// private int time = 10;
 
 	public LobbyTimer(Main plugin, Arena a) {
 		this.plugin = plugin;

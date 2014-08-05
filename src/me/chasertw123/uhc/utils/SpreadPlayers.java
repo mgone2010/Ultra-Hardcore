@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.arena.Arena;
@@ -15,10 +16,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class SpreadPlayers {
 	private static final Random random = new Random();
@@ -62,16 +63,28 @@ public class SpreadPlayers {
 			double playerXOffset = random.nextInt(10) - 5;
 			double playerZOffset = random.nextInt(10) - 5;
 
-			Location loc = new Location(world, Math.floor(location.getX() + playerXOffset) + 0.5D, 
-					world.getHighestBlockYAt((int) (location.getX() + playerXOffset), (int) (location.getZ() + playerZOffset) + 1), 
+			final Location loc = new Location(world, Math.floor(location.getX() + playerXOffset) + 0.5D, 
+					world.getHighestBlockYAt((int) (location.getX() + playerXOffset), (int) (location.getZ() + playerZOffset)) + 1.5, 
 					Math.floor(location.getZ() + playerZOffset) + 0.5D);
 
-			if (loc.getBlock().getBiome() == Biome.OCEAN || loc.getBlock().getBiome() == Biome.DEEP_OCEAN) {
-				Boat boat = (Boat) loc.getWorld().spawnEntity(loc, EntityType.BOAT);
-				boat.setPassenger(player);
-			}
+			final UUID uuid = player.getUniqueId();
 
-			player.teleport(makeSafe(loc));
+			new BukkitRunnable() {
+				
+				@Override
+				public void run() {
+					if (Bukkit.getPlayer(uuid) != null) {
+						Location tpLoc = makeSafe(loc);
+						tpLoc.setWorld(Bukkit.getWorld("UHC_world"));
+						
+						if (loc.getBlock().getBiome() == Biome.OCEAN || loc.getBlock().getBiome() == Biome.DEEP_OCEAN) {
+							Boat boat = (Boat) loc.getWorld().spawnEntity(tpLoc, EntityType.BOAT);
+							boat.setPassenger(Bukkit.getPlayer(uuid));
+						} else
+							Bukkit.getPlayer(uuid).teleport(tpLoc);
+					}
+				}
+			}.runTaskLater(plugin, (long) Math.floor(j / 5) * 20);
 		}
 	}
 
@@ -90,10 +103,10 @@ public class SpreadPlayers {
 	private Location makeSafe(Location l) {
 		int tries = 0;
 		Location loc = l.clone();
-		if (loc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.LAVA)
+		if (loc.getBlock().getType() != Material.LAVA)
 			return loc;
 		
-		while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAVA && tries <= 10) {
+		while (loc.getBlock().getType() == Material.LAVA && tries <= 10) {
 			tries++;
 			
 			if (loc.getX() < maxXZ)
@@ -103,14 +116,14 @@ public class SpreadPlayers {
 			
 			loc.setY(l.getWorld().getHighestBlockYAt(loc));
 			
-			if (loc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.LAVA)
+			if (loc.getBlock().getType() != Material.LAVA)
 				return loc;
 		}
 		
 		tries = 0;
 		loc = l.clone();
 
-		while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAVA && tries <= 10) {
+		while (loc.getBlock().getType() == Material.LAVA && tries <= 10) {
 			tries++;
 			
 			if (loc.getZ() < maxXZ)
@@ -120,14 +133,14 @@ public class SpreadPlayers {
 			
 			loc.setY(l.getWorld().getHighestBlockYAt(loc));
 			
-			if (loc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.LAVA)
+			if (loc.getBlock().getType() != Material.LAVA)
 				return loc;
 		}
 		
 		tries = 0;
 		loc = l.clone();
 
-		while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAVA && tries <= 10) {
+		while (loc.getBlock().getType() == Material.LAVA && tries <= 10) {
 			tries++;
 			
 			if (loc.getZ() > -maxXZ)
@@ -137,14 +150,14 @@ public class SpreadPlayers {
 			
 			loc.setY(l.getWorld().getHighestBlockYAt(loc));
 			
-			if (loc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.LAVA)
+			if (loc.getBlock().getType() != Material.LAVA)
 				return loc;
 		}
 		
 		tries = 0;
 		loc = l.clone();
 
-		while (loc.getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAVA && tries <= 10) {
+		while (loc.getBlock().getType() == Material.LAVA && tries <= 10) {
 			tries++;
 			
 			if (loc.getX() > -maxXZ)
@@ -154,7 +167,7 @@ public class SpreadPlayers {
 			
 			loc.setY(l.getWorld().getHighestBlockYAt(loc));
 			
-			if (loc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.LAVA)
+			if (loc.getBlock().getType() != Material.LAVA)
 				return loc;
 		}
 

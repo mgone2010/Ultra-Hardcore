@@ -8,10 +8,10 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class AsyncPlayerChat implements Listener{
 
-	private Main plugin;
+	//private Main plugin;
 	
 	public AsyncPlayerChat(Main plugin) {
-		this.plugin = plugin;
+		//this.plugin = plugin;
 	}
 	
 	@EventHandler
