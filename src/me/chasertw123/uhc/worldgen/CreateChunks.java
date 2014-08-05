@@ -41,7 +41,7 @@ public class CreateChunks extends BukkitRunnable {
 							w.getChunkAt(c.getX() + xx, c.getZ() + zz).load(true);
 
 					System.out.println("* Generated batch " + count + " out of 40");
-					if (w.getLoadedChunks().length > 2000) {
+					if (w.getLoadedChunks().length > 3000) {
 						System.err.println("! Cleaning chunks from "
 								+ w.getLoadedChunks().length);
 						for (Chunk s : w.getLoadedChunks())
