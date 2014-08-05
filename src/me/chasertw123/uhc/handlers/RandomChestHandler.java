@@ -29,14 +29,15 @@ public class RandomChestHandler {
 		loc.getChunk().load(true);
 		loc.setY(loc.getWorld().getHighestBlockYAt(loc));
 
-		Location obby = loc.clone();
 		for (int i = -1; i <= 1; i++)
 			for (int j = -1; j <= 1; j++) {
+				Location obby = loc.clone();
 				obby.add(i, 0, j).getBlock().setType(Material.OBSIDIAN);
 				obby.add(0, 1, 0).getBlock().setType(Material.AIR);
 				obby.add(0, 1, 0).getBlock().setType(Material.AIR);
 			}
 
+		loc.add(0, 1, 0);
 		loc.getBlock().setType(Material.CHEST);
 
 		Chest chest = (Chest) loc.getBlock().getState();

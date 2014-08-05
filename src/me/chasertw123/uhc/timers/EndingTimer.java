@@ -13,7 +13,7 @@ public class EndingTimer extends BukkitRunnable{
 
 	private Main plugin;
 
-	private int time = 300;
+	private int time = 60;
 
 	public EndingTimer(Main plugin) {
 		this.plugin = plugin;
