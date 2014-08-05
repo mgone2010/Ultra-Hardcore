@@ -11,6 +11,7 @@ import me.chasertw123.uhc.teams.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -58,7 +59,7 @@ public class GameTimer extends BukkitRunnable {
 		int amountOfChests = r.nextInt(3) + 3; // 2 - 5 chests.
 		for (int m = 0; m < amountOfChests; m++) {
 			long randomTime = r.nextInt((int) ((time - 1) * 60)) + 10;
-			System.out.println("chest at " + randomTime + " seconds left");
+			// System.out.println("chest at " + randomTime + " seconds left");
 			timeLeftsRandomChests.put(randomTime, ChestType.WAITING);
 			chestLocation.put(randomTime, getRandomLocation());
 		}
@@ -97,8 +98,10 @@ public class GameTimer extends BukkitRunnable {
 			this.cancel();
 		}else if (timeLeft <= 0) {
 			new DeathmatchTimer(plugin);
+			
+			World w = Bukkit.getWorld("UHC_world");
 			for (Player p : Bukkit.getOnlinePlayers())
-				p.teleport(a.getDeathmatch());
+				p.teleport(new Location(w, 0, w.getHighestBlockYAt(0, 0) + 2, 0));
 			this.cancel();
 
 		} else if (timeLeft / 1000 <= 60 * 60 && sixty) {
