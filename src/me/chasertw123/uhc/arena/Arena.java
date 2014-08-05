@@ -22,7 +22,7 @@ public class Arena {
 	// private int neededPlayers = 15, maxPlayers = 40, donatorSlots = 10;
 	private int neededPlayers = 2, maxPlayers = 40, donatorSlots = 10;
 	private long startTime = 0;
-	private Location Deathmatch = null, Lobby = null;
+	private Location Lobby = null;
 
 	private File file;
 	private FileConfiguration config;
@@ -45,9 +45,8 @@ public class Arena {
 			return;
 
 		this.Lobby = plugin.deserializeLoc(config.getString("arena.lobby"));
-		this.Deathmatch = plugin.deserializeLoc(config.getString("arena.deathmatch"));
 
-		if (this.Deathmatch == null || this.Lobby == null)
+		if (this.Lobby == null)
 			return;
 
 		this.setGameState(GameState.LOBBY);
@@ -140,10 +139,6 @@ public class Arena {
 			break;
 		}
 		this.gameState = gameState;
-	}
-
-	public Location getDeathmatch() {
-		return Deathmatch;
 	}
 
 	public Location getLobby() {

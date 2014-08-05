@@ -36,7 +36,6 @@ public class AdminCmd implements CommandExecutor {
 			if (args.length == 0) {
 				
 				plugin.sendMessage(p, ChatColor.GREEN + "/admin setLobby - Set the lobby location");
-				plugin.sendMessage(p, ChatColor.GREEN + "/admin setDeathmatch - Set the deathmatch location");
 				
 				return true;
 			}
@@ -47,13 +46,6 @@ public class AdminCmd implements CommandExecutor {
 					plugin.getA().getConfig().set("arena.lobby", plugin.serializeLoc(p.getLocation()));
 					plugin.getA().saveConfig();
 					plugin.sendMessage(p, ChatColor.GREEN + "Set lobby location!");
-					return true;
-				}
-				
-				else if (args[0].equalsIgnoreCase("setDeathmatch")) {
-					plugin.getA().getConfig().set("arena.deathmatch", plugin.serializeLoc(p.getLocation()));
-					plugin.getA().saveConfig();
-					plugin.sendMessage(p, ChatColor.GREEN + "Set deathmatch location!");					
 					return true;
 				}
 				
