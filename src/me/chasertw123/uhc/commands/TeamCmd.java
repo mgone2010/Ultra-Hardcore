@@ -273,7 +273,7 @@ public class TeamCmd implements CommandExecutor {
 								} 
 							}
 
-							plugin.getTm().createTeam(p, args[1]);
+							plugin.sendMessage(p, "You created team " + plugin.getTm().createTeam(p, args[1]).getName());
 						}
 						else
 							plugin.sendMessage(p, ChatColor.RED + "Invalid amount of arguments!");

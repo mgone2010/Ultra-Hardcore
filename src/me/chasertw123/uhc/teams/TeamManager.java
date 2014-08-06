@@ -20,8 +20,8 @@ public class TeamManager {
 		t.addPlayer(p.getName());
 	}
 
-	public void createTeam(Player p, String teamName) {
-		new Team(p.getName(), teamName);
+	public Team createTeam(Player p, String teamName) {
+		return new Team(p.getName(), teamName);
 	}
 
 	public void createTeam(Player p) {

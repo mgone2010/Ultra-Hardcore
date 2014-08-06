@@ -47,7 +47,7 @@ public class Team {
 	public Team(String creator, String teamName) {
 		this.creator = creator;
 		addPlayer(creator);
-		this.teamName = teamName;
+		this.teamName = first16Chars(teamName);
 
 		ArrayList<String> prefixes = (ArrayList<String>) teamColors.clone();
 
@@ -58,6 +58,10 @@ public class Team {
 		teamObjects.add(this);
 	}
 	
+	private String first16Chars(String s) {
+		return s.substring(0, Math.min(s.length(), 16));
+	}
+
 	@SuppressWarnings("deprecation")
 	public void sendMessage(String message) {
 		for (String s : members) 
