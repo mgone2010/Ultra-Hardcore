@@ -16,7 +16,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
-import org.bukkit.entity.Boat;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -78,8 +77,8 @@ public class SpreadPlayers {
 						tpLoc.setWorld(Bukkit.getWorld("UHC_world"));
 						
 						if (loc.getBlock().getBiome() == Biome.OCEAN || loc.getBlock().getBiome() == Biome.DEEP_OCEAN) {
-							Boat boat = (Boat) loc.getWorld().spawnEntity(tpLoc, EntityType.BOAT);
-							boat.setPassenger(Bukkit.getPlayer(uuid));
+							loc.getWorld().spawnEntity(tpLoc, EntityType.BOAT);
+							Bukkit.getPlayer(uuid).teleport(tpLoc); // Sorry, setting as passanger is not working :(
 						} else
 							Bukkit.getPlayer(uuid).teleport(tpLoc);
 					}
