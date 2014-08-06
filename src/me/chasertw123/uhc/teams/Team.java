@@ -104,12 +104,12 @@ public class Team {
 		members.remove(name);
 		sendMessage(name + " left your team.");
 		
-		if (this.members.size() != 0 && name != this.creator)
+		if (this.allMembers.size() != 0 && name == this.creator)
 			this.creator = members.get(0);
-		else 
+		else if (this.allMembers.size() == 0)
 			Team.teamObjects.remove(this);
 		
-		if (this.team != null)
+		if (this.team != null && removeFromAll)
 			team.removePlayer(Bukkit.getOfflinePlayer(name));
 	}
 	
