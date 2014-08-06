@@ -6,6 +6,7 @@ import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.teams.Team;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -25,12 +26,20 @@ public class ScoreboardHandler {
 	// Run this on start of the arena
 	@SuppressWarnings("deprecation")
 	public void start(final boolean shouldDamage) {
-		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
-		Objective obj = board.registerNewObjective("Health", "health");
-		obj.setDisplaySlot(DisplaySlot.BELOW_NAME); // Health under name.
-		Objective obj2 = board.registerNewObjective("Health2", "health");
-		obj2.setDisplaySlot(DisplaySlot.PLAYER_LIST); // Health on top.
-		
+		Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
+		if (board.getObjective("Health") == null) {
+			Objective obj = board.registerNewObjective("Health", "health");
+			obj.setDisplaySlot(DisplaySlot.BELOW_NAME); // Health under name.
+		}
+		if (board.getObjective("Health2") == null) {
+			Objective obj2 = board.registerNewObjective("Health2", "health");
+			obj2.setDisplaySlot(DisplaySlot.PLAYER_LIST); // Health on top.
+		}
+
+		for (org.bukkit.scoreboard.Team team : board.getTeams())
+			for (OfflinePlayer op : team.getPlayers())
+				team.removePlayer(op);
+
 		for (Team t : Team.teamObjects) {
 			org.bukkit.scoreboard.Team team = board.registerNewTeam(t.getName());
 			

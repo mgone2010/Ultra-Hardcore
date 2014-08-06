@@ -157,17 +157,25 @@ public class Main extends JavaPlugin {
 	}
 
 	public void setLeaveTime(String name, Long time) {
-		if (!leaveTimes.containsKey(name) && (a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH))
+		if (!leaveTimes.containsKey(name) && a.getGameState() == GameState.INGAME)
 			leaveTimes.put(name, time);
 	}
 
 	public boolean canRejoin(String name) {
 		if (leaveTimes.containsKey(name))
-			if (leaveTimes.get(name) + 30000 > System.currentTimeMillis())
+			if (leaveTimes.get(name) + 30000 > System.currentTimeMillis() && leaveTimes.get(name) != 0)
 				return true;
 			else
 				return false;
 		else
 			return false;
+	}
+
+	public void setLt(HashMap<String, Long> leaveTimes2) {
+		leaveTimes = leaveTimes2;
+	}
+
+	public HashMap<String, Long> getLt() {
+		return leaveTimes;
 	}
 }

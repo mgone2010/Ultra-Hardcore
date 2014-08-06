@@ -108,7 +108,7 @@ public class Team {
 		members.remove(name);
 		sendMessage(name + " left your team.");
 		
-		if (this.allMembers.size() != 0 && name == this.creator)
+		if (this.members.size() != 0 && name == this.creator)
 			this.creator = members.get(0);
 		else if (this.allMembers.size() == 0)
 			Team.teamObjects.remove(this);

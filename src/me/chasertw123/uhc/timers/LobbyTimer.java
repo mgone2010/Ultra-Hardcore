@@ -25,7 +25,7 @@ public class LobbyTimer extends BukkitRunnable {
 	public LobbyTimer(Main plugin, Arena a) {
 		this.plugin = plugin;
 		this.a = a;
-		
+
 		this.runTaskTimer(plugin, 20L, 20L);
 	}
 
@@ -89,7 +89,7 @@ public class LobbyTimer extends BukkitRunnable {
 			// Freeze Them
 			a.setStartTime(System.currentTimeMillis());
 			a.setGameState(GameState.INGAME);
-			
+
 			new GameTimer(plugin, a);
 
 			this.cancel();

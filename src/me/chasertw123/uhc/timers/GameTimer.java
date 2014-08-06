@@ -63,7 +63,7 @@ public class GameTimer extends BukkitRunnable {
 			timeLeftsRandomChests.put(randomTime, ChestType.WAITING);
 			chestLocation.put(randomTime, getRandomLocation());
 		}
-		
+
 		/* System.out.println("debug chest at " + (time - 2) * 60L);
 		timeLeftsRandomChests.put((time - 2) * 60L, ChestType.WAITING);
 		chestLocation.put((time - 2) * 60L, getRandomLocation()); */
@@ -98,7 +98,7 @@ public class GameTimer extends BukkitRunnable {
 			this.cancel();
 		}else if (timeLeft <= 0) {
 			new DeathmatchTimer(plugin);
-			
+
 			World w = Bukkit.getWorld("UHC_world");
 			for (Player p : Bukkit.getOnlinePlayers())
 				p.teleport(new Location(w, 0, w.getHighestBlockYAt(0, 0) + 2, 0));
@@ -148,6 +148,20 @@ public class GameTimer extends BukkitRunnable {
 				timeLeftsRandomChests.put(longvar, ChestType.SPAWNED);
 			} 
 		}
+
+		HashMap<String, Long> leaveTimes = plugin.getLt();
+
+		for (String s : leaveTimes.keySet())
+			if (leaveTimes.get(s) + 30000 > System.currentTimeMillis() && leaveTimes.get(s) != 0)
+				continue;
+			else {
+				leaveTimes.remove(s);
+				for (Team t : Team.teamObjects)
+					t.removePlayer(s, true);
+			}
+
+
+		plugin.setLt(leaveTimes);
 	}
 
 	private void handleWarning(Integer x, Integer z) {

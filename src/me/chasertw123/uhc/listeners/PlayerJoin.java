@@ -5,7 +5,6 @@ package me.chasertw123.uhc.listeners;
 import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.arena.Arena.GameState;
-//import me.chasertw123.uhc.sql.SQL;
 import me.chasertw123.uhc.teams.Team;
 import me.chasertw123.uhc.timers.LobbyTimer;
 
@@ -14,7 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+//import me.chasertw123.uhc.sql.SQL;
 
 public class PlayerJoin implements Listener {
 
@@ -37,11 +38,12 @@ public class PlayerJoin implements Listener {
 				if (t.getAllMembers().contains(p.getName()))
 					t.addPlayer(p.getName());
 			}
-			plugin.getSh().start(false);
+			// plugin.getSh().start(false);
 			return;
 		} else {
 			plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
 			p.getInventory().clear();
+			p.getInventory().setArmorContents(new ItemStack[p.getInventory().getArmorContents().length]);
 			p.getEnderChest().clear();
 		}
 
