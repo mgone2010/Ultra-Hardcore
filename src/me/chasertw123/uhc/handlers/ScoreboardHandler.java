@@ -1,19 +1,21 @@
 package me.chasertw123.uhc.handlers;
 
+import java.util.UUID;
+
 import me.chasertw123.uhc.Main;
-//import me.chasertw123.uhc.sql.SQLAPI.StatType;
 import me.chasertw123.uhc.teams.Team;
 
 import org.bukkit.Bukkit;
-//import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+//import me.chasertw123.uhc.sql.SQLAPI.StatType;
+//import org.bukkit.ChatColor;
 
 public class ScoreboardHandler {
 
-	@SuppressWarnings("unused")
 	private Main plugin;
 	
 	public ScoreboardHandler(Main plugin) {
@@ -22,7 +24,7 @@ public class ScoreboardHandler {
 	
 	// Run this on start of the arena
 	@SuppressWarnings("deprecation")
-	public void start(boolean shouldDamage) {
+	public void start(final boolean shouldDamage) {
 		Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
 		Objective obj = board.registerNewObjective("Health", "health");
 		obj.setDisplaySlot(DisplaySlot.BELOW_NAME); // Health under name.
@@ -44,8 +46,16 @@ public class ScoreboardHandler {
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			p.setScoreboard(board);
-			if (shouldDamage)
-				p.damage(0.01D);
+			
+			final UUID uuid = p.getUniqueId();
+			new BukkitRunnable() {
+				
+				@Override
+				public void run() {
+					if (shouldDamage && Bukkit.getPlayer(uuid) != null)
+						Bukkit.getPlayer(uuid).damage(0.01D);
+				}
+			}. runTaskLater(plugin, 20L);
 		}
 	}
 	/*	

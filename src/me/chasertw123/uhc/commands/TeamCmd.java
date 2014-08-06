@@ -225,14 +225,14 @@ public class TeamCmd implements CommandExecutor {
 									team = t;
 							}
 
-							if (team != null) {
+							if (team != null && team.getAllMembers().size() < plugin.getA().getArenaType().getPlayersPerTeam()) {
 								if (team.getInvites().contains(p.getName())) {
 									team.addPlayer(p.getName());
 									plugin.sendMessage(p, "You have joined the " + team.getName() + " team!");
 								} else
 									plugin.sendMessage(p, ChatColor.RED + "You are not invited in the " + team.getName() + " team!");
 							} else 
-								plugin.sendMessage(p, ChatColor.RED + "Cannot find team with name/member " + ChatColor.GOLD + args[1] + "!");
+								plugin.sendMessage(p, ChatColor.RED + "Cannot find team with name/member " + ChatColor.GOLD + args[1] + " or team is full!");
 
 						}else
 							plugin.sendMessage(p, ChatColor.RED + "Invalid amount of arguments!");
@@ -294,10 +294,10 @@ public class TeamCmd implements CommandExecutor {
 									team = t;
 							}
 
-							if (team != null)
+							if (team != null && team.getAllMembers().size() < plugin.getA().getArenaType().getPlayersPerTeam())
 								team.addPlayer(p.getName());
 							else
-								plugin.sendMessage(p, ChatColor.RED + "Cannot find team with name/member " + ChatColor.GOLD + args[1] + "!");
+								plugin.sendMessage(p, ChatColor.RED + "Cannot find team with name/member " + ChatColor.GOLD + args[1] + " or team is full!");
 
 						} else
 							plugin.sendMessage(p, ChatColor.RED + "Invalid amount of arguments!");
