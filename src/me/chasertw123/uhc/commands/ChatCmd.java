@@ -20,7 +20,7 @@ public class ChatCmd implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-		if (!cmd.getName().equalsIgnoreCase("Chat")) {
+		if (cmd.getName().equalsIgnoreCase("Chat")) {
 
 			if (!(sender instanceof Player)) {
 				plugin.sendConsole("You must be a player to use that command!");
