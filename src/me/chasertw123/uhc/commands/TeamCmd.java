@@ -245,7 +245,7 @@ public class TeamCmd implements CommandExecutor {
 						if (args.length == 1)
 							if (plugin.getTm().getTeam(p) != null)
 								if (plugin.getTm().getTeam(p).getCreator() == p.getName()) {
-									plugin.getTm().getTeam(p).sendMessage("Your team got disbanded by " + p.getName() + " D:");
+									plugin.getTm().getTeam(p).sendMessage("Your team got disbanded by " + p.getName() + " D:", true);
 									Team.teamObjects.remove(plugin.getTm().getTeam(p));
 								} else
 									plugin.sendMessage(p, ChatColor.RED + "You are not creator of your team");
@@ -317,7 +317,7 @@ public class TeamCmd implements CommandExecutor {
 									if (plugin.getTm().getTeam(Bukkit.getPlayerExact(args[1])) == plugin.getTm().getTeam(p))
 										if (plugin.getTm().getTeam(p).getCreator() == p.getName()) {
 											plugin.getTm().getTeam(p).removePlayer(args[1], true);
-											plugin.getTm().getTeam(p).sendMessage(p.getName() + " kicked " + args[1] + " out of the team! D:");
+											plugin.getTm().getTeam(p).sendMessage(p.getName() + " kicked " + args[1] + " out of the team! D:", true);
 										} else
 											plugin.sendMessage(p, ChatColor.RED + "You are not creator of this team!");
 									else
@@ -341,7 +341,7 @@ public class TeamCmd implements CommandExecutor {
 									if (plugin.getTm().getTeam(p).getInvites().contains(args[1]))
 										if (plugin.getTm().getTeam(p).getCreator() == p.getName()) {
 											plugin.getTm().getTeam(p).removeInvite(args[1]);
-											plugin.getTm().getTeam(p).sendMessage(p.getName() + " removed the invite of " + args[1]);
+											plugin.getTm().getTeam(p).sendMessage(p.getName() + " removed the invite of " + args[1], true);
 											plugin.sendMessage(Bukkit.getPlayerExact(args[1]), p.getName() + " revoked your invitement");
 										} else
 											plugin.sendMessage(p, ChatColor.RED + "You are not creator of this team!");

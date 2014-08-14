@@ -63,10 +63,10 @@ public class Team {
 	}
 
 	@SuppressWarnings("deprecation")
-	public void sendMessage(String message) {
+	public void sendMessage(String message, boolean prefix) {
 		for (String s : members) 
 			if (Bukkit.getPlayerExact(s) != null)
-				Bukkit.getPlayerExact(s).sendMessage(ChatColor.WHITE + "[" + ChatColor.AQUA + "" + ChatColor.ITALIC + "UHC" + ChatColor.WHITE + "] " + message);
+				Bukkit.getPlayerExact(s).sendMessage(prefix ? ChatColor.WHITE + "[" + ChatColor.AQUA + "" + ChatColor.ITALIC + "UHC" + ChatColor.WHITE + "] " + message : message);
 	}
 
 	public String getCreator() {
@@ -86,7 +86,7 @@ public class Team {
 	}
 
 	public void addPlayer(String m) {
-		sendMessage(m + " joined your team.");
+		sendMessage(m + " joined your team.", true);
 		allMembers.add(m);
 		members.add(m);
 		for (Team t : Team.teamObjects)
@@ -106,7 +106,7 @@ public class Team {
 		if (removeFromAll)
 			allMembers.remove(name);
 		members.remove(name);
-		sendMessage(name + " left your team.");
+		sendMessage(name + " left your team.", true);
 		
 		if (this.members.size() != 0 && name == this.creator)
 			this.creator = members.get(0);
@@ -127,7 +127,7 @@ public class Team {
 	
 	public void addInvite(String name, String inviter) {
 		invites.add(name);
-		sendMessage(name + " got invited by " + inviter);
+		sendMessage(name + " got invited by " + inviter, true);
 	}
 	
 	public void removeInvite(String name) {
