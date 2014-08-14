@@ -10,8 +10,6 @@ import me.chasertw123.uhc.handlers.ListenerHandler;
 import me.chasertw123.uhc.handlers.RandomChestHandler;
 import me.chasertw123.uhc.handlers.RecipeHandler;
 import me.chasertw123.uhc.handlers.ScoreboardHandler;
-//import me.chasertw123.uhc.sql.SQL;
-//import me.chasertw123.uhc.sql.SQLAPI;
 import me.chasertw123.uhc.teams.TeamManager;
 import me.chasertw123.uhc.utils.BungeecordMessangerSender;
 import me.chasertw123.uhc.utils.ServerConnector;
@@ -21,11 +19,15 @@ import me.chasertw123.uhc.worldgen.WorldGenStarter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Team;
 
 import com.onarandombox.MultiverseCore.MultiverseCore;
+//import me.chasertw123.uhc.sql.SQL;
+//import me.chasertw123.uhc.sql.SQLAPI;
 
 public class Main extends JavaPlugin {
 
@@ -53,6 +55,10 @@ public class Main extends JavaPlugin {
 		new RecipeHandler(this);
 
 		new WorldGenStarter(this);
+		
+		for (Team t : Bukkit.getScoreboardManager().getMainScoreboard().getTeams())
+			for (OfflinePlayer of : t.getPlayers())
+				t.removePlayer(of);
 	}
 
 	public void onDisable() {

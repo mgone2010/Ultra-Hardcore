@@ -273,7 +273,7 @@ public class TeamCmd implements CommandExecutor {
 								} 
 							}
 
-							if (plugin.getTm().getTeam(p) != null)
+							if (plugin.getTm().getTeam(p) == null)
 								plugin.sendMessage(p, "You created team " + plugin.getTm().createTeam(p, args[1]).getName());
 							else
 								plugin.sendMessage(p, ChatColor.RED + "You already have a team!");

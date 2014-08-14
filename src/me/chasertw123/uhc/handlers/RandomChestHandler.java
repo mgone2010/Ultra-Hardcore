@@ -32,7 +32,7 @@ public class RandomChestHandler {
 		for (int i = -1; i <= 1; i++)
 			for (int j = -1; j <= 1; j++) {
 				Location obby = loc.clone();
-				obby.add(i, 0, j).getBlock().setType(Material.OBSIDIAN);
+				obby.add(i, -1, j).getBlock().setType(Material.OBSIDIAN);
 				obby.add(0, 1, 0).getBlock().setType(Material.AIR);
 				obby.add(0, 1, 0).getBlock().setType(Material.AIR);
 			}
