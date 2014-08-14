@@ -294,10 +294,13 @@ public class TeamCmd implements CommandExecutor {
 									team = t;
 							}
 
-							if (team != null && team.getAllMembers().size() < plugin.getA().getArenaType().getPlayersPerTeam())
-								team.addPlayer(p.getName());
+							if (plugin.getTm().getTeam(p) != null)
+								if (team != null && team.getAllMembers().size() < plugin.getA().getArenaType().getPlayersPerTeam())
+									team.addPlayer(p.getName());
+								else
+									plugin.sendMessage(p, ChatColor.RED + "Cannot find team with name/member " + ChatColor.GOLD + args[1] + " or team is full!");
 							else
-								plugin.sendMessage(p, ChatColor.RED + "Cannot find team with name/member " + ChatColor.GOLD + args[1] + " or team is full!");
+								plugin.sendMessage(p, ChatColor.RED + "You already have a team");
 
 						} else
 							plugin.sendMessage(p, ChatColor.RED + "Invalid amount of arguments!");
