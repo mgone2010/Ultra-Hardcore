@@ -54,7 +54,7 @@ public class TeamCmd implements CommandExecutor {
 					if (p.hasPermission("uhc.team.players"))
 						plugin.sendMessage(p, ChatColor.GREEN + "/team players [Team] - Show a list of players in a team, or your own if not specified.");
 					if (p.hasPermission("uhc.team.invite"))
-						plugin.sendMessage(p, ChatColor.GREEN + "/team invite - Invite a player to your team.");
+						plugin.sendMessage(p, ChatColor.GREEN + "/team invite <Player> - Invite a player to your team.");
 					if (p.hasPermission("uhc.team.deny"))
 						plugin.sendMessage(p, ChatColor.GREEN + "/team deny <Team> - Deny an invitement.");
 					if (p.hasPermission("uhc.team.accept"))
@@ -273,7 +273,10 @@ public class TeamCmd implements CommandExecutor {
 								} 
 							}
 
-							plugin.sendMessage(p, "You created team " + plugin.getTm().createTeam(p, args[1]).getName());
+							if (plugin.getTm().getTeam(p) != null)
+								plugin.sendMessage(p, "You created team " + plugin.getTm().createTeam(p, args[1]).getName());
+							else
+								plugin.sendMessage(p, ChatColor.RED + "You already have a team!");
 						}
 						else
 							plugin.sendMessage(p, ChatColor.RED + "Invalid amount of arguments!");
