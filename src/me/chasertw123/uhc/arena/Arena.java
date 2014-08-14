@@ -49,7 +49,7 @@ public class Arena {
 		if (this.Lobby == null)
 			return;
 
-		this.setGameState(GameState.LOBBY);
+		this.setGameState(GameState.RESETING);
 	}
 
 	public void setLobby(Location l) {

@@ -1,6 +1,7 @@
 package me.chasertw123.uhc.worldgen;
 
 import me.chasertw123.uhc.Main;
+import me.chasertw123.uhc.arena.Arena.GameState;
 import me.chasertw123.uhc.utils.SpreadPlayers;
 
 import org.bukkit.Bukkit;
@@ -66,6 +67,7 @@ public class CreateChunks extends BukkitRunnable {
 				System.gc();
 				System.err.println("! Cleaned chunks to "
 						+ w.getLoadedChunks().length);
+				plugin.getA().setGameState(GameState.LOBBY);
 				System.out.println("\\** Generation done **/");
 			}
 		}.runTaskLater(plugin, currentTaskDelay + 1);
