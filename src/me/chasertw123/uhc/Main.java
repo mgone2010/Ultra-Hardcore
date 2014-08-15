@@ -55,10 +55,12 @@ public class Main extends JavaPlugin {
 		new RecipeHandler(this);
 
 		new WorldGenStarter(this);
-		
+
 		for (Team t : Bukkit.getScoreboardManager().getMainScoreboard().getTeams())
 			for (OfflinePlayer of : t.getPlayers())
 				t.removePlayer(of);
+
+		Bukkit.getScoreboardManager().getMainScoreboard().getTeams().clear();
 	}
 
 	public void onDisable() {
@@ -113,7 +115,7 @@ public class Main extends JavaPlugin {
 	 *				Getters and Setters				*
 	 * 												*
 	 ************************************************/
-/*
+	/*
 	public SQL getSql() {
 		return sql;
 	}
@@ -121,7 +123,7 @@ public class Main extends JavaPlugin {
 	public SQLAPI getAPI() {
 		return api;
 	}
-*/
+	 */
 	public ServerConnector getSc() {
 		return sc;
 	}

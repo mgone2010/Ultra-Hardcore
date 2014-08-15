@@ -37,7 +37,6 @@ public class RandomChestHandler {
 				obby.add(0, 1, 0).getBlock().setType(Material.AIR);
 			}
 
-		loc.add(0, 1, 0);
 		loc.getBlock().setType(Material.CHEST);
 
 		Chest chest = (Chest) loc.getBlock().getState();
