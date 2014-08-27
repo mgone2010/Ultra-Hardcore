@@ -37,7 +37,7 @@ public class ListenerHandler {
 		pm.registerEvents(new PlayerKick(plugin), plugin);
 		pm.registerEvents(new PlayerLogin(plugin), plugin);
 		pm.registerEvents(new PlayerQuit(plugin), plugin);
-		pm.registerEvents(new PlayerTeleport(), plugin);
+		pm.registerEvents(new PlayerTeleport(plugin), plugin);
 		pm.registerEvents(new PrepareItemCraft(), plugin);
 		pm.registerEvents(new SignChange(plugin), plugin);
 	}

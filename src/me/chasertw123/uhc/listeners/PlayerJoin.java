@@ -20,18 +20,29 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class PlayerJoin implements Listener {
 
 	private Main plugin;
-	
+
 	public PlayerJoin(Main plugin) {
 		this.plugin = plugin;
 	}
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		
+
+		new BukkitRunnable() {
+
+			@Override
+			public void run() {
+				for (Player p : Bukkit.getOnlinePlayers()) {
+					plugin.getBms().updatePlayers(Bukkit.getOnlinePlayers().length, p);
+					plugin.getBms().updateState(plugin.getA().getGameState(), p);
+				}
+			}
+		}.runTask(plugin);
+
 		Player p = e.getPlayer();
-		
+
 		Arena a = plugin.getA();
-		
+
 		if (plugin.canRejoin(p.getName())) {
 			plugin.sendMessage(p, "Succesfully rejoined this game!");
 			for (Team t : Team.teamObjects) {
@@ -47,27 +58,30 @@ public class PlayerJoin implements Listener {
 			p.getEnderChest().clear();
 		}
 
+		if (a.getGameState() == GameState.RESETING)
+			p.kickPlayer("Game is starting up. Please wait a minute.");
+		
 		if ((a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH 
-				|| a.getGameState() == GameState.ENDING || a.getGameState() == GameState.RESETING) && !plugin.canRejoin(p.getName())) {
+				|| a.getGameState() == GameState.ENDING) && !plugin.canRejoin(p.getName())) {
 			//e.disallow(Result.KICK_OTHER, "UHC is currently in progress!");
 			p.kickPlayer("UHC is currently in progress!");
 			return;
 		}
 		/*
 		SQL sql = plugin.getSql();
-		
+
 		sql.openConnection();
-		
+
 		try {
-			
+
 			if (!sql.containsPlayer(p)) {
-				
+
 				PreparedStatement stmt = sql.getC().prepareStatement(
 						"INSERT INTO `uhc` values(?,0,0,0,0,0,0);");
-				
+
 				stmt.setString(1, p.getName());
 				stmt.execute();
-				
+
 				stmt.close();
 			}
 		} catch (Exception ex) {
@@ -75,31 +89,22 @@ public class PlayerJoin implements Listener {
 		} finally {
 			sql.closeConnection();
 		}
-		*/
+		 */
 		a.addPlayer(p);
-		
+
 		if (a.getGameState() == GameState.LOBBY || a.getGameState() == GameState.STARTING)
 			p.teleport(plugin.getA().getLobby());
-		
+
 		// p.setScoreboard(plugin.getSh().getScoreboard(p));
-		
+
 		if (a.getPlayers().size() >= a.getNeededPlayers() && a.getGameState() == GameState.LOBBY) {
-			
+
 			a.setGameState(GameState.STARTING);
-			
+
 			new LobbyTimer(plugin, a);
 		}
 
 		if (a.getArenaType().isAutoTeaming())
 			plugin.getTm().autoTeam(p, a.getArenaType());
-		
-		new BukkitRunnable() {
-			
-			@Override
-			public void run() {
-				if (Bukkit.getOnlinePlayers().length > 0)
-					plugin.getBms().updatePlayers(Bukkit.getOnlinePlayers().length, Bukkit.getOnlinePlayers()[0]);
-			}
-		}.runTask(plugin);
 	}
 }

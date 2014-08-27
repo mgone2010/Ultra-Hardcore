@@ -42,13 +42,13 @@ public class CreateChunks extends BukkitRunnable {
 							w.getChunkAt(c.getX() + xx, c.getZ() + zz).load(true);
 
 					System.out.println("* Generated batch " + count + " out of 40");
-					if (w.getLoadedChunks().length > 3000) {
-						System.err.println("! Cleaning chunks from "
+					if (count == 20) {
+						System.err.println("! Cleaning loaded chunks from "
 								+ w.getLoadedChunks().length);
 						for (Chunk s : w.getLoadedChunks())
 							s.unload(true, true);
-						System.gc();
-						System.err.println("! Cleaned chunks to "
+						//System.gc();
+						System.err.println("! Cleaned loaded chunks to "
 								+ w.getLoadedChunks().length);
 					}
 				}
@@ -60,12 +60,12 @@ public class CreateChunks extends BukkitRunnable {
 
 			@Override
 			public void run() {
-				System.err.println("! Cleaning chunks from "
+				System.err.println("! Cleaning loaded chunks from "
 						+ w.getLoadedChunks().length);
 				for (Chunk s : w.getLoadedChunks())
 					s.unload(true, true);
 				System.gc();
-				System.err.println("! Cleaned chunks to "
+				System.err.println("! Cleaned loading chunks to "
 						+ w.getLoadedChunks().length);
 				plugin.getA().setGameState(GameState.LOBBY);
 				System.out.println("\\** Generation done **/");

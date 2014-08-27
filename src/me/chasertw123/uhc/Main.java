@@ -60,8 +60,8 @@ public class Main extends JavaPlugin {
 			for (OfflinePlayer of : t.getPlayers())
 				t.removePlayer(of);
 
-		if (Bukkit.getScoreboardManager().getMainScoreboard().getTeams() != null && Bukkit.getScoreboardManager().getMainScoreboard().getTeams().size() > 1)
-			Bukkit.getScoreboardManager().getMainScoreboard().getTeams().clear();
+		/*if (Bukkit.getScoreboardManager().getMainScoreboard().getTeams() != null && Bukkit.getScoreboardManager().getMainScoreboard().getTeams().size() > 1)
+			Bukkit.getScoreboardManager().getMainScoreboard().getTeams().clear();*/
 	}
 
 	public void onDisable() {

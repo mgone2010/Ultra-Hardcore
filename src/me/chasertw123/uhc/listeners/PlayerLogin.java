@@ -25,13 +25,16 @@ public class PlayerLogin implements Listener {
 		
 		Arena a = plugin.getA();
 		
+		if (a.getGameState() == GameState.RESETING)
+			e.disallow(Result.KICK_OTHER, "UHC is currently starting up. Please wait a minute");
+		
 		if (plugin.canRejoin(p.getName()))
 			plugin.sendMessage(p, "Succesfully rejoined this game!");
 		else
 			plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
 
 		if ((a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH 
-				|| a.getGameState() == GameState.ENDING || a.getGameState() == GameState.RESETING) && !plugin.canRejoin(p.getName())) {
+				|| a.getGameState() == GameState.ENDING) && !plugin.canRejoin(p.getName())) {
 			e.disallow(Result.KICK_OTHER, "UHC is currently in progress!");
 			// p.kickPlayer("UHC is currently in progress!");
 			return;
