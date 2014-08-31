@@ -25,8 +25,8 @@ public class CreateWorlds extends BukkitRunnable {
 			plugin.getMultiverseCore().getMVWorldManager().deleteWorld("UHC_world_nether", true);
 		
 		plugin.getMultiverseCore().getMVWorldManager().addWorld("UHC_world", Environment.NORMAL,
-				wgc.generateRandomSeed(20), WorldType.NORMAL, true, null);
+				wgc.getRandomSeed(), WorldType.NORMAL, true, null);
 		plugin.getMultiverseCore().getMVWorldManager().addWorld("UHC_world_nether", Environment.NETHER,
-				wgc.generateRandomSeed(20), WorldType.NORMAL, true, null);
+				wgc.getRandomSeed(), WorldType.NORMAL, true, null);
 	}
 }
