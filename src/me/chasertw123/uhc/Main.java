@@ -1,6 +1,8 @@
 package me.chasertw123.uhc;
 
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.arena.Arena.GameState;
@@ -56,12 +58,13 @@ public class Main extends JavaPlugin {
 
 		new WorldGenStarter(this);
 
-		for (Team t : Bukkit.getScoreboardManager().getMainScoreboard().getTeams())
-			for (OfflinePlayer of : t.getPlayers())
-				t.removePlayer(of);
+		List<Team> teams = new ArrayList<Team>();
 
-		/*if (Bukkit.getScoreboardManager().getMainScoreboard().getTeams() != null && Bukkit.getScoreboardManager().getMainScoreboard().getTeams().size() > 1)
-			Bukkit.getScoreboardManager().getMainScoreboard().getTeams().clear();*/
+		for (Team t : Bukkit.getScoreboardManager().getMainScoreboard().getTeams())
+			teams.add(t);
+
+		for (Team t : teams)
+			t.unregister();
 	}
 
 	public void onDisable() {
