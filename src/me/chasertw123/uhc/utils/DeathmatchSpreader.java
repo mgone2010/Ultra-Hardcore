@@ -15,22 +15,20 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Biome;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class SpreadPlayers {
+public class DeathmatchSpreader {
 	private static final Random random = new Random();
 	private Main plugin;
-	public static final Integer maxXZ = 50;
+	public static final Integer maxXZ = 60;
 
-	public SpreadPlayers(Main plugin) {
+	public DeathmatchSpreader(Main plugin) {
 		this.plugin = plugin;
 	}
 
 	@SuppressWarnings("deprecation")
-	public void spreadPlayers(Arena a, Location[] locs, World w) {
+	public void spreadPlayers(Arena a, World w) {
 		List<Player> players = new ArrayList<Player>();
 
 		for (Team t : Team.teamObjects)
@@ -40,7 +38,8 @@ public class SpreadPlayers {
 					players.add(p);
 				}
 
-		spread(w, players, locs);
+		spread(w, players, getSpreadLocations(w, 40, -maxXZ, -maxXZ,
+				maxXZ, maxXZ));
 	}
 
 
@@ -59,8 +58,8 @@ public class SpreadPlayers {
 
 			location = hashmap.get(team);
 
-			double playerXOffset = random.nextInt(10) - 5;
-			double playerZOffset = random.nextInt(10) - 5;
+			double playerXOffset = random.nextInt(5) - 2.5;
+			double playerZOffset = random.nextInt(5) - 2.5;
 
 			final Location loc = new Location(world, Math.floor(location.getX() + playerXOffset) + 0.5D, 
 					world.getHighestBlockYAt((int) (location.getX() + playerXOffset), (int) (location.getZ() + playerZOffset)) + 1.5, 
@@ -69,21 +68,17 @@ public class SpreadPlayers {
 			final UUID uuid = player.getUniqueId();
 
 			new BukkitRunnable() {
-				
+
 				@Override
 				public void run() {
 					if (Bukkit.getPlayer(uuid) != null) {
 						Location tpLoc = makeSafe(loc);
 						tpLoc.setWorld(Bukkit.getWorld("UHC_world"));
-						
-						if (loc.getBlock().getBiome() == Biome.OCEAN || loc.getBlock().getBiome() == Biome.DEEP_OCEAN) {
-							loc.getWorld().spawnEntity(tpLoc, EntityType.BOAT);
-							Bukkit.getPlayer(uuid).teleport(tpLoc); // Sorry, setting as passanger is not working :(
-						} else
-							Bukkit.getPlayer(uuid).teleport(tpLoc);
+
+						Bukkit.getPlayer(uuid).teleport(tpLoc);
 					}
 				}
-			}.runTaskLater(plugin, (long) Math.floor(j / 2) * 20);
+			}.runTaskLater(plugin, (long) Math.floor(j / 5) * 20);
 		}
 	}
 
@@ -104,68 +99,68 @@ public class SpreadPlayers {
 		Location loc = l.clone();
 		if (loc.getBlock().getType() != Material.LAVA)
 			return loc;
-		
+
 		while (loc.getBlock().getType() == Material.LAVA && tries <= 10) {
 			tries++;
-			
+
 			if (loc.getX() < maxXZ)
 				loc.setX(l.getX() + 1);
 			else 
 				break;
-			
+
 			loc.setY(l.getWorld().getHighestBlockYAt(loc));
-			
+
 			if (loc.getBlock().getType() != Material.LAVA)
 				return loc;
 		}
-		
+
 		tries = 0;
 		loc = l.clone();
 
 		while (loc.getBlock().getType() == Material.LAVA && tries <= 10) {
 			tries++;
-			
+
 			if (loc.getZ() < maxXZ)
 				loc.setZ(l.getZ() + 1);
 			else 
 				break;
-			
+
 			loc.setY(l.getWorld().getHighestBlockYAt(loc));
-			
+
 			if (loc.getBlock().getType() != Material.LAVA)
 				return loc;
 		}
-		
+
 		tries = 0;
 		loc = l.clone();
 
 		while (loc.getBlock().getType() == Material.LAVA && tries <= 10) {
 			tries++;
-			
+
 			if (loc.getZ() > -maxXZ)
 				loc.setZ(l.getZ() - 1);
 			else 
 				break;
-			
+
 			loc.setY(l.getWorld().getHighestBlockYAt(loc));
-			
+
 			if (loc.getBlock().getType() != Material.LAVA)
 				return loc;
 		}
-		
+
 		tries = 0;
 		loc = l.clone();
 
 		while (loc.getBlock().getType() == Material.LAVA && tries <= 10) {
 			tries++;
-			
+
 			if (loc.getX() > -maxXZ)
 				loc.setX(l.getX() - 1);
 			else 
 				break;
-			
+
 			loc.setY(l.getWorld().getHighestBlockYAt(loc));
-			
+
 			if (loc.getBlock().getType() != Material.LAVA)
 				return loc;
 		}

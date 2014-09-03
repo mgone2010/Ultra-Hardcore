@@ -49,7 +49,6 @@ public class PlayerJoin implements Listener {
 				if (t.getAllMembers().contains(p.getName()))
 					t.addPlayer(p.getName());
 			}
-			// plugin.getSh().start(false);
 			return;
 		} else {
 			plugin.sendMessage(p, "You joined a " + a.getArenaType().toString().toLowerCase() + " game.");
@@ -63,7 +62,6 @@ public class PlayerJoin implements Listener {
 		
 		if ((a.getGameState() == GameState.INGAME || a.getGameState() == GameState.DEATHMATCH 
 				|| a.getGameState() == GameState.ENDING) && !plugin.canRejoin(p.getName())) {
-			//e.disallow(Result.KICK_OTHER, "UHC is currently in progress!");
 			p.kickPlayer("UHC is currently in progress!");
 			return;
 		}

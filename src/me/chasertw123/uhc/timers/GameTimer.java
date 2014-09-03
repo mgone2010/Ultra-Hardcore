@@ -7,6 +7,7 @@ import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.arena.ArenaType;
 import me.chasertw123.uhc.teams.Team;
+import me.chasertw123.uhc.utils.DeathmatchSpreader;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -96,12 +97,11 @@ public class GameTimer extends BukkitRunnable {
 		if (Team.teamObjects.size() <= 1) {
 			new EndingTimer(plugin);
 			this.cancel();
-		}else if (timeLeft <= 0) {
+		} else if (timeLeft <= 0) {
 			new DeathmatchTimer(plugin);
 
 			World w = Bukkit.getWorld("UHC_world");
-			for (Player p : Bukkit.getOnlinePlayers())
-				p.teleport(new Location(w, 0, w.getHighestBlockYAt(0, 0) + 2, 0));
+			new DeathmatchSpreader(plugin).spreadPlayers(a, w);
 			this.cancel();
 
 		} else if (timeLeft / 1000 <= 60 * 60 && sixty) {
