@@ -29,7 +29,7 @@ public class PlayerTeleport implements Listener{
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
-	public void onTeleport (PlayerPortalEvent e) {
+	public void onPlayerPortal(PlayerPortalEvent e) {
 		final UUID uuid = e.getPlayer().getUniqueId();
 		new BukkitRunnable() {
 

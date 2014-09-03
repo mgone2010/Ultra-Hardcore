@@ -92,17 +92,23 @@ public class PlayerJoin implements Listener {
 		 */
 		a.addPlayer(p);
 
-		if (a.getGameState() == GameState.LOBBY || a.getGameState() == GameState.STARTING)
+		if (a.getGameState() == GameState.LOBBY || a.getGameState() == GameState.STARTING) {
 			p.teleport(plugin.getA().getLobby());
 
-		// p.setScoreboard(plugin.getSh().getScoreboard(p));
+			// p.setScoreboard(plugin.getSh().getScoreboard(p));
+		}
 
 		if (a.getPlayers().size() >= a.getNeededPlayers() && a.getGameState() == GameState.LOBBY) {
+			
+			for (Player pl : Bukkit.getOnlinePlayers())
+				plugin.sendMessage(pl, "Game is starting in 180 seconds");
 
 			a.setGameState(GameState.STARTING);
 
 			new LobbyTimer(plugin, a);
-		}
+		} else if (a.getPlayers().size() < a.getNeededPlayers() && a.getGameState() == GameState.LOBBY)
+			for (Player pl : Bukkit.getOnlinePlayers())
+				plugin.sendMessage(pl, "Game will start when " + (a.getNeededPlayers() - a.getPlayers().size()) + " more players have joined");
 
 		if (a.getArenaType().isAutoTeaming())
 			plugin.getTm().autoTeam(p, a.getArenaType());

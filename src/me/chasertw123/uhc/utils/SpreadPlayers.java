@@ -83,7 +83,7 @@ public class SpreadPlayers {
 							Bukkit.getPlayer(uuid).teleport(tpLoc);
 					}
 				}
-			}.runTaskLater(plugin, (long) Math.floor(j / 5) * 20);
+			}.runTaskLater(plugin, (long) Math.floor(j / 2) * 20);
 		}
 	}
 

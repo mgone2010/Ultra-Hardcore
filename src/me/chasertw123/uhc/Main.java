@@ -1,7 +1,7 @@
 package me.chasertw123.uhc;
 
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import me.chasertw123.uhc.arena.Arena;
@@ -21,7 +21,6 @@ import me.chasertw123.uhc.worldgen.WorldGenStarter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;

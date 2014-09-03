@@ -53,9 +53,16 @@ public class LobbyTimer extends BukkitRunnable {
 				p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1F, 1F);
 		}
 
-		if (a.getPlayers().size() == 0) {
+		if (a.getPlayers().size() < a.getNeededPlayers()) {
+			for (Player p : Bukkit.getOnlinePlayers()) {
+				plugin.sendMessage(p, ChatColor.RED + "Game has been cancelled due to not enough players being online");
+				p.setLevel(0);
+				BarAPI.setMessage(p, ChatColor.RED + "Game has been cancelled!", 5);
+			}
+
 			cancel();
 			a.setGameState(GameState.LOBBY);
+			return;
 		}
 
 		if (time == 0) {
