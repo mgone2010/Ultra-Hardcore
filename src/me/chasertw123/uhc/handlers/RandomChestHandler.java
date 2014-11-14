@@ -18,7 +18,7 @@ public class RandomChestHandler {
 		add(new ItemStack(Material.GOLDEN_APPLE, 1));
 	}};
 	private static final ArrayList<ItemStack> TIER_TWO = new ArrayList<ItemStack>(){{
-		add(new ItemStack(Material.IRON_INGOT, 1));
+		add(new ItemStack(Material.IRON_INGOT, 3));
 		add(new ItemStack(Material.GOLD_INGOT, 1));
 	}};
 	private static final ArrayList<ItemStack> TIER_THREE = new ArrayList<ItemStack>(){{

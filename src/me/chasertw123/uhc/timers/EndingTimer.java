@@ -31,17 +31,26 @@ public class EndingTimer extends BukkitRunnable{
 	public void run() {
 
 		if (time == 0 || Bukkit.getOnlinePlayers().length == 0) {
+			
 			plugin.getA().setGameState(GameState.RESETING);
+			
 			for (Player p : Bukkit.getOnlinePlayers())
 				p.kickPlayer(ChatColor.RED + "Server is now restarting \n Thanks for playing");
-			
+				
 			plugin.getMultiverseCore().deleteWorld("UHC_world");	
 			plugin.getMultiverseCore().deleteWorld("UHC_world_nether");
 			
 			Bukkit.getServer().shutdown();
-		} else if (time % 10 == 0) 
+		} 
+		
+		else if (time % 10 == 0) 
 			for (Player p : Bukkit.getOnlinePlayers())
-				plugin.sendMessage(p, ChatColor.RED + "Server restarting in " + ChatColor.GOLD + time / 10 + ChatColor.RED  + " seconds!");
+				plugin.sendMessage(p, ChatColor.RED + "Server restarting in " + ChatColor.GOLD + time + ChatColor.RED  + " seconds!");
+		
+		else if (time <= 3)
+			for (Player p : Bukkit.getOnlinePlayers())
+				plugin.sendMessage(p, ChatColor.RED + "Server restarting in " + ChatColor.GOLD + time + ChatColor.RED  + " seconds!");
+			
 		
 		time--;
 	}

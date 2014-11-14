@@ -76,7 +76,8 @@ public class SpreadPlayers {
 						Location tpLoc = makeSafe(loc);
 						tpLoc.setWorld(Bukkit.getWorld("UHC_world"));
 						
-						if (loc.getBlock().getBiome() == Biome.OCEAN || loc.getBlock().getBiome() == Biome.DEEP_OCEAN) {
+						if (loc.getBlock().getBiome() == Biome.OCEAN || loc.getBlock().getBiome() == Biome.DEEP_OCEAN
+								|| loc.getBlock().getBiome() == Biome.RIVER) {
 							
 							for (int x = -1; x <= 1; x++) {
 								for (int z = -1; z <= 1; z++) {

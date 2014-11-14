@@ -6,6 +6,8 @@ package me.chasertw123.uhc.listeners;
 import me.chasertw123.uhc.Main;
 //import me.chasertw123.uhc.sql.SQLAPI.StatType;
 
+import me.chasertw123.uhc.arena.Arena.GameState;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
@@ -31,6 +33,11 @@ public class PlayerInteract implements Listener {
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		
 		Player p = e.getPlayer();
+		
+		if (plugin.getA().getGameState() == GameState.STARTING) {
+			e.setCancelled(true);
+			p.updateInventory();
+		}
 		
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock() != null 
 				&& e.getClickedBlock().getState() != null && e.getClickedBlock().getState() instanceof Sign) {
