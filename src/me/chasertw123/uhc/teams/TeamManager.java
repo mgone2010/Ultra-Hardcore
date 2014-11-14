@@ -3,8 +3,8 @@ package me.chasertw123.uhc.teams;
 import java.util.ArrayList;
 
 import me.chasertw123.uhc.Main;
-import me.chasertw123.uhc.arena.ArenaType;
 import me.chasertw123.uhc.arena.Arena.GameState;
+import me.chasertw123.uhc.arena.ArenaType;
 
 import org.bukkit.entity.Player;
 

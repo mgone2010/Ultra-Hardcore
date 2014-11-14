@@ -1,11 +1,11 @@
 package me.chasertw123.uhc.handlers;
 
+import me.chasertw123.uhc.Main;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
-
-import me.chasertw123.uhc.Main;
 
 public class RecipeHandler {
 

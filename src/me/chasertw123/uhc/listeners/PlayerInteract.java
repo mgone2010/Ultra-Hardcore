@@ -3,6 +3,9 @@ package me.chasertw123.uhc.listeners;
 //import java.util.Arrays;
 
 //import org.bukkit.Bukkit;
+import me.chasertw123.uhc.Main;
+//import me.chasertw123.uhc.sql.SQLAPI.StatType;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
@@ -14,9 +17,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 //import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 //import org.bukkit.inventory.meta.ItemMeta;
-
-import me.chasertw123.uhc.Main;
-//import me.chasertw123.uhc.sql.SQLAPI.StatType;
 
 public class PlayerInteract implements Listener {
 

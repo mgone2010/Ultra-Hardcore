@@ -29,10 +29,13 @@ import org.bukkit.scoreboard.Team;
 import com.onarandombox.MultiverseCore.MultiverseCore;
 //import me.chasertw123.uhc.sql.SQL;
 //import me.chasertw123.uhc.sql.SQLAPI;
+//import me.chasertw123.uhc.sql.SQL;
+//import me.chasertw123.uhc.sql.SQLAPI;
 
 public class Main extends JavaPlugin {
 
 	private HashMap<String, Long> leaveTimes = new HashMap<String, Long>();
+	
 	//private SQL sql = new SQL(this);
 	//private SQLAPI api = new SQLAPI(sql);
 	private ServerConnector sc = new ServerConnector(this);

@@ -13,7 +13,7 @@ public class EndingTimer extends BukkitRunnable{
 
 	private Main plugin;
 
-	private int time = 60;
+	private int time = 10;
 
 	public EndingTimer(Main plugin) {
 		this.plugin = plugin;
@@ -39,9 +39,9 @@ public class EndingTimer extends BukkitRunnable{
 			plugin.getMultiverseCore().deleteWorld("UHC_world_nether");
 			
 			Bukkit.getServer().shutdown();
-		} else if (time % 60 == 0) 
+		} else if (time % 10 == 0) 
 			for (Player p : Bukkit.getOnlinePlayers())
-				plugin.sendMessage(p, ChatColor.RED + "Server restarting in " + ChatColor.GOLD + time / 60 + ChatColor.RED  + " minutes!");
+				plugin.sendMessage(p, ChatColor.RED + "Server restarting in " + ChatColor.GOLD + time / 10 + ChatColor.RED  + " seconds!");
 		
 		time--;
 	}

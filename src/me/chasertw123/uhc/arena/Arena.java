@@ -20,14 +20,14 @@ public class Arena {
 	private ArrayList<String> players = new ArrayList<String>();
 	private GameState gameState = GameState.DISABLED;
 	// private int neededPlayers = 15, maxPlayers = 40, donatorSlots = 10;
-	private int neededPlayers = 2, maxPlayers = 40, donatorSlots = 10; // TODO: Debug only
+	private int neededPlayers = 1, maxPlayers = 40, donatorSlots = 10; // TODO: Debug only
 	private long startTime = 0;
 	private Location Lobby = null;
 
 	private File file;
 	private FileConfiguration config;
 	private ArenaType type;
-	public enum GameState{ LOBBY, STARTING, INGAME, DEATHMATCH, ENDING, RESETING, DISABLED; }
+	public enum GameState{ STARTINGUP, LOBBY, STARTING, INGAME, DEATHMATCH, ENDING, RESETING, DISABLED; }
 
 	public Arena(Main plugin) {
 

@@ -19,8 +19,8 @@ public class LobbyTimer extends BukkitRunnable {
 	private Main plugin;
 	private Arena a;
 
-	private int time = 180;
-	// private int time = 10;
+	// private int time = 180;
+	private int time = 10;
 
 	public LobbyTimer(Main plugin, Arena a) {
 		this.plugin = plugin;
@@ -81,6 +81,8 @@ public class LobbyTimer extends BukkitRunnable {
 				p.setSaturation(20L);
 				p.setFoodLevel(20);
 				p.setGameMode(GameMode.SURVIVAL);
+				p.getInventory().clear();
+				p.updateInventory();
 
 				p.playSound(p.getLocation(), Sound.LEVEL_UP, 1F, 1F);
 				p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200 , 4));
@@ -94,11 +96,10 @@ public class LobbyTimer extends BukkitRunnable {
 			plugin.getSp().spreadPlayers(a, plugin.getLocs(), Bukkit.getWorld("UHC_world"));
 			// Give Items
 			// Freeze Them
-			a.setStartTime(System.currentTimeMillis());
-			a.setGameState(GameState.INGAME);
+			a.setGameState(GameState.STARTING);
 
-			new GameTimer(plugin, a);
-
+			new FrozenTimer(plugin, a);
+			
 			this.cancel();
 		}
 
