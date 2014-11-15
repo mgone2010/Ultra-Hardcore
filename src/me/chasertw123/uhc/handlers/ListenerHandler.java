@@ -5,6 +5,7 @@ import me.chasertw123.uhc.listeners.AsyncPlayerChat;
 import me.chasertw123.uhc.listeners.BlockBreak;
 import me.chasertw123.uhc.listeners.BlockPlace;
 import me.chasertw123.uhc.listeners.ChunkPopulate;
+import me.chasertw123.uhc.listeners.EntityDamageByEntity;
 import me.chasertw123.uhc.listeners.EntityDeath;
 import me.chasertw123.uhc.listeners.EntityRegainHealth;
 import me.chasertw123.uhc.listeners.InventoryClick;
@@ -32,6 +33,7 @@ public class ListenerHandler {
 		pm.registerEvents(new BlockBreak(plugin), plugin);
 		pm.registerEvents(new BlockPlace(plugin), plugin);
 		pm.registerEvents(new ChunkPopulate(plugin), plugin);
+		pm.registerEvents(new EntityDamageByEntity(plugin), plugin);
 		pm.registerEvents(new EntityDeath(), plugin);
 		pm.registerEvents(new EntityRegainHealth(), plugin);
 		pm.registerEvents(new InventoryClick(), plugin);

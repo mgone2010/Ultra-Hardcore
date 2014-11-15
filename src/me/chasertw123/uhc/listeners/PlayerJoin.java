@@ -103,10 +103,6 @@ public class PlayerJoin implements Listener {
 		}
 
 		if (a.getPlayers().size() >= a.getNeededPlayers() && a.getGameState() == GameState.LOBBY) {
-			
-			for (Player pl : Bukkit.getOnlinePlayers())
-				plugin.sendMessage(pl, "Game is starting in 180 seconds");
-
 			a.setGameState(GameState.STARTING);
 
 			new LobbyTimer(plugin, a);

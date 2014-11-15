@@ -26,7 +26,7 @@ public class GameTimer extends BukkitRunnable {
 
 	private enum ChestType { WAITING, WARNED, SPAWNED }
 
-	private int time;
+	private int time, grace;
 	private boolean shortendDeadmatch = false;
 	private long shortendDeadmatchStart = 0;
 
@@ -70,12 +70,26 @@ public class GameTimer extends BukkitRunnable {
 		chestLocation.put((time - 2) * 60L, getRandomLocation()); */
 
 		for (Player p : Bukkit.getOnlinePlayers())
-			plugin.sendMessage(p, "This game has " + time + " minutes till deadmatch.");
+			plugin.sendMessage(p, "The 5 minute grace period has started!");
+		
+		a.setGrace(true);
+		grace = 60;
+		
 		this.runTaskTimer(this.plugin, 100L, 100L); // Run timer every 5 seconds, uses more resources, but not much. Makes timings more precise
 	}
 
 	@Override
 	public void run() {
+		
+		grace--;
+		
+		if (grace <= 0 && a.isGrace()) {
+			a.setGrace(false);
+			
+			for (Player p : Bukkit.getOnlinePlayers())
+				plugin.sendMessage(p, "The grace period has ended!");
+		}
+		
 		long timeLeft = (shortendDeadmatch ? 60000 : time * 60000) - (System.currentTimeMillis() - (shortendDeadmatch ? shortendDeadmatchStart : a.getStartTime()));
 
 		if (Team.teamObjects.size() <= 3 && timeLeft / 1000 < time * 45D && timeLeft / 1000 >= 60) { 
@@ -166,7 +180,7 @@ public class GameTimer extends BukkitRunnable {
 
 	private void handleWarning(Integer x, Integer z) {
 		for (Player p : Bukkit.getOnlinePlayers())
-			plugin.sendMessage(p, "Over 30 seconds a chest will spawn at X: " + x + " Z: " + z);
+			plugin.sendMessage(p, "In 30 seconds a chest will spawn at X: " + x + " Z: " + z);
 	}
 
 	private void spawnChest(Integer x, Integer z, Location loc) {

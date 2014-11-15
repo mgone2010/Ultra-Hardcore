@@ -18,11 +18,17 @@ public class PrepareItemCraft implements Listener {
 		CraftingInventory ci = e.getInventory();
 		boolean GOLD_INGOT = false;
 		boolean GOLD_BLOCK = false;
-		for (ItemStack is : ci)
+		
+		for (ItemStack is : ci) {
+			
+			if (is == null)
+				return;
+			
 			if (is.getType() == Material.GOLD_INGOT)
 				GOLD_INGOT = true;
 			else if (is.getType() == Material.GOLD_BLOCK)
 				GOLD_BLOCK = true;
+		}
 
 		if (ci.getResult().getType() == Material.GOLDEN_CARROT)	
 			if (!GOLD_INGOT) {

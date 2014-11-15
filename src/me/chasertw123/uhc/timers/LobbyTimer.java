@@ -3,7 +3,6 @@ package me.chasertw123.uhc.timers;
 import me.chasertw123.uhc.Main;
 import me.chasertw123.uhc.arena.Arena;
 import me.chasertw123.uhc.arena.Arena.GameState;
-import me.confuser.barapi.BarAPI;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,6 +25,9 @@ public class LobbyTimer extends BukkitRunnable {
 		this.plugin = plugin;
 		this.a = a;
 
+		for (Player pl : Bukkit.getOnlinePlayers())
+			plugin.sendMessage(pl, "Game is starting in " + time + " seconds");
+		
 		this.runTaskTimer(plugin, 20L, 20L);
 	}
 
@@ -39,9 +41,6 @@ public class LobbyTimer extends BukkitRunnable {
 
 			Player p = Bukkit.getPlayerExact(s);
 			p.setLevel(time);
-
-			BarAPI.setMessage(p, ChatColor.WHITE + "" + ChatColor.BOLD + "Ultra Hardcore starts in " + ChatColor.RED 
-					+ "" + ChatColor.BOLD + time + ChatColor.WHITE + "" + ChatColor.BOLD + " seconds!");
 
 			if (time == 10 || time == 30)
 				if (plugin.getTm().getTeam(p) != null)
@@ -57,7 +56,6 @@ public class LobbyTimer extends BukkitRunnable {
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				plugin.sendMessage(p, ChatColor.RED + "Game has been cancelled due to not enough players being online");
 				p.setLevel(0);
-				BarAPI.setMessage(p, ChatColor.RED + "Game has been cancelled!", 5);
 			}
 
 			cancel();
@@ -72,9 +70,6 @@ public class LobbyTimer extends BukkitRunnable {
 					return;
 
 				Player p = Bukkit.getPlayerExact(s);
-
-				if (BarAPI.hasBar(p))
-					BarAPI.removeBar(p);
 
 				p.setExp(0);
 				p.setHealth(p.getMaxHealth());
