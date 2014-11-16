@@ -103,10 +103,12 @@ public class Team {
 
 	@SuppressWarnings("deprecation")
 	public void removePlayer(String name, boolean removeFromAll) {
+		
+		if (members.remove(name) || creator.equals(name) || members.contains(name));
+			sendMessage(name + " left your team.", true);
+		
 		if (removeFromAll)
 			allMembers.remove(name);
-		members.remove(name);
-		sendMessage(name + " left your team.", true);
 		
 		if (this.members.size() != 0 && name == this.creator)
 			this.creator = members.get(0);

@@ -24,7 +24,7 @@ public class PlayerDeath implements Listener {
 			for (Team t : Team.teamObjects)
 				t.removePlayer(e.getEntity().getName(), true);
 			e.setDeathMessage(ChatColor.WHITE + "[" + ChatColor.AQUA + "" + ChatColor.ITALIC + "UHC" + ChatColor.WHITE + "] " + e.getDeathMessage());
-			e.getEntity().kickPlayer(e.getDeathMessage().replaceAll(e.getEntity().getName(), "You"));
+			e.getEntity().kickPlayer(e.getDeathMessage().replaceAll(e.getEntity().getName(), "You").replaceAll("was", "were"));
 		}
 	}
 }
