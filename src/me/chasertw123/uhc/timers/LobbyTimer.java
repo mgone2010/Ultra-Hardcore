@@ -31,7 +31,6 @@ public class LobbyTimer extends BukkitRunnable {
 		this.runTaskTimer(plugin, 20L, 20L);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void run() {
 

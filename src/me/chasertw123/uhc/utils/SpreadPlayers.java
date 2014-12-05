@@ -21,15 +21,16 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class SpreadPlayers {
-	private static final Random random = new Random();
+	
 	private Main plugin;
-	public static final Integer maxXZ = 50;
+	
+	private static final Random random = new Random();
+	public static final Integer maxXZ = 900;
 
 	public SpreadPlayers(Main plugin) {
 		this.plugin = plugin;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void spreadPlayers(Arena a, Location[] locs, World w) {
 		List<Player> players = new ArrayList<Player>();
 
@@ -65,7 +66,7 @@ public class SpreadPlayers {
 			final Location loc = new Location(world, Math.floor(location.getX() + playerXOffset) + 0.5D, 
 					world.getHighestBlockYAt((int) (location.getX() + playerXOffset), (int) (location.getZ() + playerZOffset)) + 1.5, 
 					Math.floor(location.getZ() + playerZOffset) + 0.5D);
-
+			
 			final UUID uuid = player.getUniqueId();
 
 			new BukkitRunnable() {
@@ -89,6 +90,7 @@ public class SpreadPlayers {
 							
 							Bukkit.getPlayer(uuid).teleport(tpLoc);
 							Bukkit.getPlayer(uuid).getInventory().addItem(new ItemStack(Material.BOAT));
+							Bukkit.getPlayer(uuid).updateInventory();
 						} 
 						
 						else Bukkit.getPlayer(uuid).teleport(tpLoc);

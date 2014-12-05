@@ -15,6 +15,7 @@ public class Team {
 	private String prefix = "";
 	public static ArrayList<Team> teamObjects = new ArrayList<Team>();
 	private org.bukkit.scoreboard.Team team = null;
+	
 	@SuppressWarnings("serial")
 	public static ArrayList<String> teamColors = new ArrayList<String>(){{
 		// 10 normal colors, nothing special
@@ -62,7 +63,6 @@ public class Team {
 		return s.substring(0, Math.min(s.length(), 16));
 	}
 
-	@SuppressWarnings("deprecation")
 	public void sendMessage(String message, boolean prefix) {
 		for (String s : members) 
 			if (Bukkit.getPlayerExact(s) != null)
@@ -104,7 +104,7 @@ public class Team {
 	@SuppressWarnings("deprecation")
 	public void removePlayer(String name, boolean removeFromAll) {
 		
-		if (members.remove(name) || creator.equals(name) || members.contains(name));
+		if (members.remove(name) || creator.equals(name) || members.contains(name))
 			sendMessage(name + " left your team.", true);
 		
 		if (removeFromAll)

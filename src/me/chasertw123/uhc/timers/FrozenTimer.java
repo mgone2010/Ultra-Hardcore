@@ -18,7 +18,6 @@ public class FrozenTimer extends BukkitRunnable {
 	
 	private int time = 10;
 	
-	@SuppressWarnings("deprecation")
 	public FrozenTimer(Main plugin, Arena a) {
 		this.plugin = plugin;
 		this.a = a;

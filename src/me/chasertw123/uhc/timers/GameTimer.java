@@ -59,7 +59,7 @@ public class GameTimer extends BukkitRunnable {
 
 		int amountOfChests = r.nextInt(3) + 3; // 2 - 5 chests.
 		for (int m = 0; m < amountOfChests; m++) {
-			long randomTime = r.nextInt((int) ((time - 1) * 60)) + 10;
+			long randomTime = r.nextInt((time - 1) * 60) + 10;
 			// System.out.println("chest at " + randomTime + " seconds left");
 			timeLeftsRandomChests.put(randomTime, ChestType.WAITING);
 			chestLocation.put(randomTime, getRandomLocation());

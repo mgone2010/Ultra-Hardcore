@@ -28,7 +28,6 @@ public class EntityDamageByEntity implements Listener {
 			if (!plugin.getA().isGrace())
 				return;
 			
-			
 			if (e.getDamager() instanceof Player) {
 				
 				e.setCancelled(true);

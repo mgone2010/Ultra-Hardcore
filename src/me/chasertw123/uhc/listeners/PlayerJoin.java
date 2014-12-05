@@ -33,7 +33,7 @@ public class PlayerJoin implements Listener {
 			@Override
 			public void run() {
 				for (Player p : Bukkit.getOnlinePlayers()) {
-					plugin.getBms().updatePlayers(Bukkit.getOnlinePlayers().length, p);
+					plugin.getBms().updatePlayers(Bukkit.getOnlinePlayers().size(), p);
 					plugin.getBms().updateState(plugin.getA().getGameState(), p);
 				}
 			}

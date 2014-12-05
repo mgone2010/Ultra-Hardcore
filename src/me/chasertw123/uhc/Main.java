@@ -13,7 +13,7 @@ import me.chasertw123.uhc.handlers.RandomChestHandler;
 import me.chasertw123.uhc.handlers.RecipeHandler;
 import me.chasertw123.uhc.handlers.ScoreboardHandler;
 import me.chasertw123.uhc.teams.TeamManager;
-import me.chasertw123.uhc.utils.BungeecordMessangerSender;
+import me.chasertw123.uhc.utils.BungeecordMessengerSender;
 import me.chasertw123.uhc.utils.ServerConnector;
 import me.chasertw123.uhc.utils.SpreadPlayers;
 import me.chasertw123.uhc.worldgen.WorldGenStarter;
@@ -42,12 +42,13 @@ public class Main extends JavaPlugin {
 	private ScoreboardHandler sh = new ScoreboardHandler(this);
 	private TeamManager tm = new TeamManager(this);
 	private SpreadPlayers sp = new SpreadPlayers(this);
-	private BungeecordMessangerSender bms = new BungeecordMessangerSender(this);
+	private BungeecordMessengerSender bms = new BungeecordMessengerSender(this);
 	private ChatHandler ch = new ChatHandler();
 	private RandomChestHandler rch = new RandomChestHandler();
 	private Arena a;
 	public Location[] locs = new Location[40];
 
+	@Override
 	public void onEnable() {
 
 		saveDefaultConfig();
@@ -69,6 +70,7 @@ public class Main extends JavaPlugin {
 			t.unregister();
 	}
 
+	@Override
 	public void onDisable() {
 		if (Bukkit.getWorld("UHC_world") != null)
 			getMultiverseCore().getMVWorldManager().deleteWorld("UHC_world",
@@ -158,7 +160,7 @@ public class Main extends JavaPlugin {
 		return getConfig().getString("server.current");
 	}
 
-	public BungeecordMessangerSender getBms() {
+	public BungeecordMessengerSender getBms() {
 		return bms;
 	}
 

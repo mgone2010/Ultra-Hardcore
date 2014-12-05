@@ -12,11 +12,11 @@ import org.bukkit.entity.Player;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
-public class BungeecordMessangerSender {
+public class BungeecordMessengerSender {
 
 	private Main plugin;
 
-	public BungeecordMessangerSender(Main plugin) {
+	public BungeecordMessengerSender(Main plugin) {
 		this.plugin = plugin;
 	}
 

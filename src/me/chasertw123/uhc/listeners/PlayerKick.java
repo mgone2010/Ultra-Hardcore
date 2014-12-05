@@ -26,8 +26,8 @@ public class PlayerKick implements Listener{
 
 			@Override
 			public void run() {
-				if (Bukkit.getOnlinePlayers().length > 0)
-					plugin.getBms().updatePlayers(Bukkit.getOnlinePlayers().length, Bukkit.getOnlinePlayers()[0]);
+				if (Bukkit.getOnlinePlayers().size() > 0)
+					plugin.getBms().updatePlayers(Bukkit.getOnlinePlayers().size(), Bukkit.getOnlinePlayers().iterator().next());
 			}
 		}.runTask(plugin);
 	}

@@ -27,7 +27,6 @@ public class DeathmatchSpreader {
 		this.plugin = plugin;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void spreadPlayers(Arena a, World w) {
 		List<Player> players = new ArrayList<Player>();
 
